@@ -25,6 +25,12 @@ use Illuminate\Support\Facades\Route;
 Route::controller(ClientsController::class)->group(function () {
     Route::get('/', 'index')->name('client.page.home.index');
     Route::get('/product', 'page_product')->name('client.page.product');
+    Route::get('/product/{id}', 'detail')->name('client.page.detail');
+    Route::get('/cart', 'cart')->name('client.page.cart');
+    Route::post('/cart/add', 'addToCart')->name('client.add.cart');
+    Route::put('/cart/update', 'updateCart')->name('client.update.cart');
+    Route::delete('/cart/remove', 'removeItem')->name('client.remove.cart');
+    Route::delete('/cart/clear', 'clearCart')->name('client.clear.cart');
 });
 Route::controller(AuthController::class)->group(function () {
     Route::get('login', 'login')->name('login');

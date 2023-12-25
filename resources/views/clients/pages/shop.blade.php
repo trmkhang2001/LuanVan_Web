@@ -382,7 +382,7 @@
                             <div class="col-xl-2 col-lg-2 col-6">
                                 <div class="product-box">
                                     <div class="img-wrapper">
-                                        <a href="product/details.html">
+                                        <a href="{{ route('client.page.detail', $product->id) }}">
                                             <img src="{{ $product->img }}" class="w-100 bg-img blur-up lazyload"
                                                 alt="">
                                         </a>
@@ -399,7 +399,7 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="javascript:void(0)">
+                                                    <a href="{{ route('client.page.detail', $product->id) }}">
                                                         <i data-feather="eye"></i>
                                                     </a>
                                                 </li>
@@ -437,7 +437,7 @@
                                             </div>
                                             <p class="font-light mb-sm-2 mb-0">Dolores Et</p>
                                             <a href="product/details.html" class="font-default">
-                                                <h5>Dolorem Libero Tempore Voluptatem</h5>
+                                                <h5>{{ $product->name }}</h5>
                                             </a>
                                         </div>
                                     </div>

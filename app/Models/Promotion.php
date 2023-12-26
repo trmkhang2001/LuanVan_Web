@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Promotion extends Model
 {
     use HasFactory;
+    public function product()
+    {
+        return $this->hasMany(Product::class);
+    }
     protected $fillable = [
         'name',
         'percent',

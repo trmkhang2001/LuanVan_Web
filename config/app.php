@@ -29,6 +29,18 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    /*
+    |--------------------------------------------------------------------------
+    | Application Status Order
+    |--------------------------------------------------------------------------
+    |
+    | This value is the name of your application. This value is used when the
+    | framework needs to place the application's name in a notification or
+    | any other location as required by the application or its packages.
+    |
+    */
+
+    'order_status' => ['ORDER' => '1', 'ACCEPT' => '2', 'SHIPPING' => '3', 'DONE' => '4', 'CANCEL' => '0'],
 
     /*
     |--------------------------------------------------------------------------

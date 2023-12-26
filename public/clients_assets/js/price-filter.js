@@ -5,8 +5,8 @@ $(function () {
     $inputFrom = $(".js-input-from"),
     $inputTo = $(".js-input-to"),
     instance,
-    min = 0,
-    max = 500,
+    min = 5000000,
+    max = 50000000,
     from = 0,
     to = 0;
 
@@ -14,12 +14,12 @@ $(function () {
     type: "double",
     min: min,
     max: max,
-    from: 0,
-    to: 500,
-    prefix: "$ ",
+    from: 5000000,
+    to: 50000000,
+    postfix: 'VNĐ',
     onStart: updateInputs,
     onChange: updateInputs,
-    step: 5,
+    step: 1000000,
     prettify_enabled: true,
     prettify_separator: ".",
     values_separator: " - ",
@@ -33,10 +33,10 @@ $(function () {
     to = "$" + data.to;
 
     $inputFrom.prop("value", from);
-    $inputTo.prop("value", to);   
-    
-    $("#prange").val(data.from + "," + data.to); 
-    $("#prange").trigger('change');   
+    $inputTo.prop("value", to);
+
+    $("#prange").val(data.from + "," + data.to);
+    $("#prange").trigger('change');
   }
 
   $inputFrom.on("input", function () {
@@ -55,7 +55,7 @@ $(function () {
   });
 
   $inputTo.on("input", function () {
-    var val = $(this).prop("value");    
+    var val = $(this).prop("value");
 
     // validate
     if (val < from) {

@@ -31,6 +31,8 @@ Route::controller(ClientsController::class)->group(function () {
     Route::put('/cart/update', 'updateCart')->name('client.update.cart');
     Route::delete('/cart/remove', 'removeItem')->name('client.remove.cart');
     Route::delete('/cart/clear', 'clearCart')->name('client.clear.cart');
+    Route::get('/cart/checkout', 'checkOut')->name('client.cart.checkout');
+    Route::post('/cart/checkout', 'order');
 });
 Route::controller(AuthController::class)->group(function () {
     Route::get('login', 'login')->name('login');

@@ -24,6 +24,8 @@
 
     <title>SurfsideMedia</title>
 
+    {{-- Boostrap 5 --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link id="rtl-link" rel="stylesheet" type="text/css"
         href="{{ asset('clients_assets/css/vendors/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('clients_assets/css/vendors/ion.rangeSlider.min.css') }}">
@@ -118,6 +120,7 @@
         </a>
     </div>
     <div class="bg-overlay"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('clients_assets/js/jquery-3.5.1.min.js') }}"></script>
     <script src="{{ asset('clients_assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('clients_assets/js/feather/feather.min.js') }}"></script>

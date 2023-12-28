@@ -18,10 +18,13 @@ class ProductController extends Controller
     //
     public function index()
     {
-        // $product = Product::with('category')->find(6);
-        // echo $product->category->name;
-        $items =  Product::paginate(6);
+        $items =  Product::paginate(5);
         return view('admin.product.index', ['items' => $items]);
+    }
+    public function search(Request $request)
+    {
+        $items = Product::where('sku', 'LIKE', '%' . $request->search . '%')->orwhere('name', 'LIKE', '%' . $request->search . '%')->paginate(5);
+        return view('admin.product.index', compact('items'));
     }
     public function create()
     {

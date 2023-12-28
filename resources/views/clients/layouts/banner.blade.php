@@ -1,45 +1,25 @@
-<section class="pt-0 poster-section">
-    <div class="poster-image slider-for custome-arrow classic-arrow">
-        <div>
-            <img src="{{ asset('images/banner_1.jpg') }}" class="img-fluid blur-up lazyload" alt="">
-        </div>
-        <div>
-            <img src="{{ asset('clients_assets/images/furniture-images/poster/2.png') }}"
-                class="img-fluid blur-up lazyload" alt="">
-        </div>
-        <div>
-            <img src="{{ asset('clients_assets/images/furniture-images/poster/3.png') }}"
-                class="img-fluid blur-up lazyload" alt="">
-        </div>
-    </div>
-    <div class="slider-nav image-show">
-        <div>
-            <div class="poster-img">
-                <img src="{{ asset('clients_assets/images/furniture-images/poster/t2.jpg') }}"
-                    class="img-fluid blur-up lazyload" alt="">
-                <div class="overlay-color">
-                    <i class="fas fa-plus theme-color"></i>
-                </div>
+<section class="pt-0">
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{ asset('images/banner_1.jpg') }}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="{{ asset('images/banner_2.jpg') }}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="{{ asset('images/banner_3.jpg') }}" class="d-block w-100" alt="...">
             </div>
         </div>
-        <div>
-            <div class="poster-img">
-                <img src="{{ asset('clients_assets/images/furniture-images/poster/t1.jpg') }}"
-                    class="img-fluid blur-up lazyload" alt="">
-                <div class="overlay-color">
-                    <i class="fas fa-plus theme-color"></i>
-                </div>
-            </div>
-
-        </div>
-        <div>
-            <div class="poster-img">
-                <img src="{{ asset('clients_assets/images/furniture-images/poster/t3.jpg') }}"
-                    class="img-fluid blur-up lazyload" alt="">
-                <div class="overlay-color">
-                    <i class="fas fa-plus theme-color"></i>
-                </div>
-            </div>
-        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleSlidesOnly"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleSlidesOnly"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
 </section>

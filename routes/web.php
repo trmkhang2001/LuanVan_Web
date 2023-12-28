@@ -63,6 +63,7 @@ Route::middleware('auth')->group(function () {
         });
         Route::controller(ProductController::class)->prefix('/product')->group(function () {
             Route::get('/', 'index')->name('admin.page.product.index');
+            Route::post('/search', 'search')->name('admin.page.product.search');
             Route::get('/add', 'create')->name('admin.page.product.create');
             Route::post('/add', 'store');
             Route::get('/update/{id}', 'edit')->name('admin.page.product.edit');
@@ -79,6 +80,7 @@ Route::middleware('auth')->group(function () {
         });
         Route::controller(UsersController::class)->prefix('/user')->group(function () {
             Route::get('/', 'index')->name('admin.page.user.index');
+            Route::post('/search', 'search')->name('admin.page.user.seach');
             Route::get('/add', 'create')->name('admin.page.user.create');
             Route::post('/add', 'store');
             Route::get('/update/{id}', 'edit')->name('admin.page.user.edit');

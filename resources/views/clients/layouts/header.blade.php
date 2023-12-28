@@ -7,8 +7,8 @@
                         <div class="menu-left">
                             <div class="brand-logo">
                                 <a href="index.htm">
-                                    <img src="{{ asset('clients_assets/images/logo.png') }}"
-                                        class="h-logo img-fluid blur-up lazyload" alt="logo">
+                                    <img src="{{ asset('images/logo.png') }}" class="h-logo img-fluid blur-up lazyload"
+                                        alt="logo">
                                 </a>
                             </div>
 
@@ -27,13 +27,15 @@
                                                 </span>
                                             </div>
                                         </li>
-                                        <li><a href="/" class="nav-link menu-title">Home</a></li>
-                                        <li><a href="/product" class="nav-link menu-title">Shop</a></li>
-                                        <li><a href="/cart" class="nav-link menu-title">Cart</a></li>
-                                        <li><a href="about-us.html" class="nav-link menu-title">About Us</a></li>
-                                        <li><a href="contact-us.html" class="nav-link menu-title">Contact Us</a>
+                                        <li><a href="/" class="nav-link menu-title fs-5 fw-bold">Trang chủ</a>
                                         </li>
-                                        <li><a href="blog.html" class="nav-link menu-title">Blog</a></li>
+                                        <li><a href="/product" class="nav-link menu-title fs-5 fw-bold">Mua hàng</a>
+                                        </li>
+                                        <li><a href="about-us.html" class="nav-link menu-title fs-5 fw-bold">Giới
+                                                thiệu</a>
+                                        </li>
+                                        <li><a href="blog.html" class="nav-link menu-title fs-5 fw-bold">Tin tức</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

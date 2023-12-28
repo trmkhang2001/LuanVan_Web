@@ -45,47 +45,12 @@
             </style>
             <div class="row g-sm-4 g-3">
                 @foreach ($items as $product)
-                    <div class="col-xl-2 col-lg-2 col-6">
-                        <div class="product-box">
-                            <div class="img-wrapper">
-                                <a href="product/details.html">
-                                    <img src="{{ $product->img }}" class="w-100 bg-img blur-up lazyload" alt="">
-                                </a>
-                                <div class="circle-shape"></div>
-                                <span class="background-text">Furniture</span>
-                                <div class="label-block">
-                                    <span class="label label-theme">30% Off</span>
-                                </div>
-                                <div class="cart-wrap">
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocart-btn">
-                                                <i data-feather="shopping-cart"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)">
-                                                <i data-feather="eye"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="wishlist">
-                                                <i data-feather="heart"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-style-3 product-style-chair">
-                                <div class="product-title d-block mb-0">
-                                    <div class="r-price">
-                                        <div class="theme-color fw-bold">{{ number_format($product->price) }} ₫</div>
-                                    </div>
-                                    <p class="font-light mb-sm-2 mb-0">PC Gaming</p>
-                                    <a href="product/details.html" class="font-default">
-                                        <h5>{{ $product->name }}</h5>
-                                    </a>
-                                </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card" style="width: 18rem;">
+                            <img src="{{ $product->img }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                    of the card's content.</p>
                             </div>
                         </div>
                     </div>

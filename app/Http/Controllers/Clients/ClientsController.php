@@ -19,7 +19,7 @@ class ClientsController extends Controller
     //   
     public function index()
     {
-        $items = Product::paginate(6);
+        $items = Product::paginate(8);
         return view('clients.pages.home', ['items' => $items]);
     }
     public function page_product(Request $request)

@@ -14,9 +14,15 @@ class UsersController extends Controller
     //
     public function index()
     {
-        $users = User::all();
-        return view('admin.user.index', compact('users'));
+        $items = User::paginate(3);
+        return view('admin.user.index', compact('items'));
     }
+    public function search(Request $request)
+    {
+        $items = User::where('name', 'LIKE', '%' . $request->search . '%')->orwhere('email', 'LIKE', '%' . $request->search . '%')->orwhere('phone', 'LIKE', '%' . $request->search . '%')->paginate(5);
+        return view('admin.user.index', compact('items'));
+    }
+
     public function create()
     {
         return view('admin.user.create');

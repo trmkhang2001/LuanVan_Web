@@ -42,59 +42,6 @@
                     <!--end::Search-->
                 </div>
                 <!--end::Card title-->
-
-                <!--begin::Card toolbar-->
-                <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
-                    <!--begin::Flatpickr-->
-                    <div class="input-group w-250px">
-                        <input class="form-control form-control-solid rounded rounded-end-0 flatpickr-input"
-                            placeholder="Pick date range" id="kt_ecommerce_sales_flatpickr" type="hidden"><input
-                            class="form-control form-control-solid rounded rounded-end-0 input"
-                            placeholder="Pick date range" tabindex="0" type="text" readonly="readonly">
-                        <button class="btn btn-icon btn-light" id="kt_ecommerce_sales_flatpickr_clear">
-                            <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span class="path2"></span></i>
-                        </button>
-                    </div>
-                    <!--end::Flatpickr-->
-
-                    <div class="w-100 mw-150px">
-                        <!--begin::Select2-->
-                        <select class="form-select form-select-solid select2-hidden-accessible" data-control="select2"
-                            data-hide-search="true" data-placeholder="Status" data-kt-ecommerce-order-filter="status"
-                            data-select2-id="select2-data-9-dkty" tabindex="-1" aria-hidden="true" data-kt-initialized="1">
-                            <option data-select2-id="select2-data-11-anwn"></option>
-                            <option value="all">All</option>
-                            <option value="Cancelled">Cancelled</option>
-                            <option value="Completed">Completed</option>
-                            <option value="Denied">Denied</option>
-                            <option value="Expired">Expired</option>
-                            <option value="Failed">Failed</option>
-                            <option value="Pending">Pending</option>
-                            <option value="Processing">Processing</option>
-                            <option value="Refunded">Refunded</option>
-                            <option value="Delivered">Delivered</option>
-                            <option value="Delivering">Delivering</option>
-                        </select><span class="select2 select2-container select2-container--bootstrap5" dir="ltr"
-                            data-select2-id="select2-data-10-gp9x" style="width: 100%;"><span class="selection"><span
-                                    class="select2-selection select2-selection--single form-select form-select-solid"
-                                    role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0"
-                                    aria-disabled="false" aria-labelledby="select2-uug4-container"
-                                    aria-controls="select2-uug4-container"><span class="select2-selection__rendered"
-                                        id="select2-uug4-container" role="textbox" aria-readonly="true" title="Status"><span
-                                            class="select2-selection__placeholder">Status</span></span><span
-                                        class="select2-selection__arrow" role="presentation"><b
-                                            role="presentation"></b></span></span></span><span class="dropdown-wrapper"
-                                aria-hidden="true"></span></span>
-                        <!--end::Select2-->
-                    </div>
-
-                    <!--begin::Add product-->
-                    <a href="/metronic8/demo1/../demo1/apps/ecommerce/catalog/add-product.html" class="btn btn-primary">
-                        Add Order
-                    </a>
-                    <!--end::Add product-->
-                </div>
-                <!--end::Card toolbar-->
             </div>
             <!--end::Card header-->
 
@@ -116,33 +63,28 @@
                                                 value="1">
                                         </div>
                                     </th>
-                                    <th class="min-w-100px sorting" tabindex="0"
-                                        aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
+                                    <th class="min-w-100px sorting" tabindex="0" aria-controls="kt_ecommerce_sales_table"
+                                        rowspan="1" colspan="1"
                                         aria-label="Order ID: activate to sort column ascending" style="width: 80px;">
                                         Order ID</th>
-                                    <th class="min-w-175px sorting" tabindex="0"
-                                        aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
-                                        aria-label="Customer: activate to sort column ascending"
-                                        style="width: 269.075px;">Customer</th>
-                                    <th class="text-end min-w-70px sorting" tabindex="0"
-                                        aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
-                                        style="width: 97.0375px;">
+                                    <th class="min-w-175px sorting" tabindex="0" aria-controls="kt_ecommerce_sales_table"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Customer: activate to sort column ascending" style="width: 269.075px;">
+                                        Customer</th>
+                                    <th class=" min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_sales_table"
+                                        rowspan="1" colspan="1" style="width: 97.0375px;">
                                         Phone</th>
-                                    <th class="text-end min-w-70px sorting" tabindex="0"
-                                        aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
-                                        aria-label="Status: activate to sort column ascending" style="width: 97.0375px;">
+                                    <th class=" min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_sales_table"
+                                        rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending"
+                                        style="width: 97.0375px;">
                                         Status</th>
-                                    <th class="text-end min-w-100px sorting" tabindex="0"
-                                        aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
-                                        aria-label="Total: activate to sort column ascending" style="width: 132.663px;">
+                                    <th class=" min-w-100px sorting" tabindex="0" aria-controls="kt_ecommerce_sales_table"
+                                        rowspan="1" colspan="1" aria-label="Total: activate to sort column ascending"
+                                        style="width: 132.663px;">
                                         Total</th>
-                                    <th class="text-end min-w-100px sorting" tabindex="0"
-                                        aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
-                                        style="width: 132.663px;">Date Update</th>
-                                    <th class="text-end min-w-100px sorting" tabindex="0"
-                                        aria-controls="kt_ecommerce_sales_table" rowspan="1" colspan="1"
-                                        style="width: 132.663px;">Status Payment</th>
-                                    <th class="text-end min-w-100px sorting_disabled" rowspan="1" colspan="1"
+                                    <th class=" min-w-100px sorting" tabindex="0" aria-controls="kt_ecommerce_sales_table"
+                                        rowspan="1" colspan="1" style="width: 132.663px;">Order Update</th>
+                                    <th class=" min-w-100px sorting_disabled" rowspan="1" colspan="1"
                                         aria-label="Actions" style="width: 132.688px;">Actions</th>
                                 </tr>
                             </thead>
@@ -160,16 +102,7 @@
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <!--begin:: Avatar -->
-                                                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                                    <a href="#">
-                                                        <div class="symbol-label fs-3 bg-light-danger text-danger">
-                                                            E </div>
-                                                    </a>
-                                                </div>
-                                                <!--end::Avatar-->
-
-                                                <div class="ms-5">
+                                                <div class="">
                                                     <!--begin::Title-->
                                                     <a href="#"
                                                         class="text-gray-800 text-hover-primary fs-5 fw-bold">{{ $order->name }}</a>
@@ -179,36 +112,31 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="text-end pe-0">
+                                        <td class=" pe-0">
                                             <!--begin::Badges-->
                                             <span>{{ $order->phone }}</span>
                                             <!--end::Badges-->
                                         </td>
-                                        <td class="text-end pe-0" data-order="Expired">
+                                        <td class=" pe-0" data-order="Expired">
                                             <!--begin::Badges-->
-                                            @if ($order->status == 1)
-                                                <div class="badge badge-light-info">Prepare</div>
+                                            @if ($order->status == config('app.order_status.ORDER'))
+                                                <div class="badge badge-light-info">Order</div>
                                                 <!--end::Badges-->
-                                            @elseif ($order->status == 2)
-                                                <div class="badge badge-light-primary">Delivered</div>
-                                            @elseif($order->status == 3)
-                                                <div class="badge badge-light-success">Completed</div>
+                                            @elseif ($order->status == config('app.order_status.SHIPPING'))
+                                                <div class="badge badge-light-primary">Shipping</div>
+                                            @elseif($order->status == config('app.order_status.DONE'))
+                                                <div class="badge badge-light-success">Done</div>
+                                            @elseif ($order->status == config('app.order_status.CANCEL'))
+                                                <div class="badge badeg-light-danger">Cancel</div>
                                             @endif
                                         </td>
-                                        <td class="text-end pe-0">
-                                            <span class="fw-bold">{{ $order->total_price }}</span>
+                                        <td class=" pe-0">
+                                            <span class="fw-bold">{{ number_format($order->total) . ' VNĐ' }}</span>
                                         </td>
-                                        <td class="text-end">
+                                        <td class="">
                                             <span class="fw-bold">{{ date('d/m/Y', strtotime($order->updated_at)) }}</span>
                                         </td>
-                                        <td class="text-end">
-                                            @if ($order->payment_status == 1)
-                                                <span class="fw-bold badge-light-success">Paid</span>
-                                            @elseif($order->payment_status == 0)
-                                                <span class="fw-bold badge-light-danger">unpaid</span>
-                                            @endif
-                                        </td>
-                                        <td class="text-end">
+                                        <td class="">
                                             <a href="#"
                                                 class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary"
                                                 data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
@@ -219,7 +147,7 @@
                                                 data-kt-menu="true">
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a href="/metronic8/demo1/../demo1/apps/ecommerce/sales/details.html"
+                                                    <a href="{{ route('admin.page.order.detail', $order->id) }}"
                                                         class="menu-link px-3">
                                                         View
                                                     </a>

@@ -46,6 +46,8 @@ License: For each use you must have a valid license purchased only from above li
     <link href="{{ asset('admin_assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('admin_assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!--begin::Theme mode setup on page load-->
     <script>
         var defaultThemeMode = "light";
@@ -138,6 +140,7 @@ License: For each use you must have a valid license purchased only from above li
     <script src="{{ asset('admin_assets/js/custom/utilities/modals/new-target.js') }}"></script>
     <script src="{{ asset('admin_assets/js/custom/utilities/modals/users-search.js') }}"></script>
     <!--end::Custom Javascript-->
+    @stack('scripts')
     <!--end::Javascript-->
 </body>
 <!--end::Body-->

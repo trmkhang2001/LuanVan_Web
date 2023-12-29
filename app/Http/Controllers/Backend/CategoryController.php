@@ -12,7 +12,7 @@ class CategoryController extends Controller
     //
     public function index()
     {
-        $categorys = Category::all();
+        $categorys = Category::with('product')->paginate(5);
         return view('admin.category.index', compact('categorys'));
     }
     public function create()
@@ -42,8 +42,8 @@ class CategoryController extends Controller
     }
     public function destroy(string $id)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
-        return redirect()->route('admin.page.category.index')->with('success', 'Delete Category Success');
+        // $category = Category::findOrFail($id);
+        // $category->delete();
+        // return redirect()->route('admin.page.category.index')->with('success', 'Delete Category Success');
     }
 }

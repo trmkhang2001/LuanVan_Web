@@ -21,12 +21,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+    public function role()
+    {
+        return $this->belongsTo(Roles::class);
+    }
     protected $fillable = [
         'name',
         'email',
         'phone',
         'password',
-        'role',
+        'role_id',
     ];
 
     /**

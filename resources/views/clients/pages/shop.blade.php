@@ -83,32 +83,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingSeven">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseSeven">
-                                        Mã khuyến mãi
-                                    </button>
-                                </h2>
-                                <div id="collapseSeven" class="accordion-collapse collapse show"
-                                    aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <ul class="category-list">
-                                            @foreach ($promotions as $promotion)
-                                                <li>
-                                                    <div class="form-check ps-0 custome-form-check">
-                                                        <input class="checkbox_animated check-it" type="checkbox"
-                                                            id="flexCheckDefault19">
-                                                        <label class="form-check-label"
-                                                            for="flexCheckDefault19">{{ $promotion->name . ' - ' . $promotion->percent . '%' }}</label>
-                                                    </div>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

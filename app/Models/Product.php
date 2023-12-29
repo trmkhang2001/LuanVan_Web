@@ -26,7 +26,7 @@ class Product extends Model
         'id_bh',
         'quantity',
         'status',
-        'id_category',
-        'id_supploer',
+        'category_id',
+        'supploer_id',
     ];
 }

@@ -18,7 +18,7 @@ class ProductController extends Controller
     //
     public function index()
     {
-        $items =  Product::paginate(5);
+        $items =  Product::orderBy('created_at', 'desc')->paginate(5);
         return view('admin.product.index', ['items' => $items]);
     }
     public function search(Request $request)
@@ -59,8 +59,8 @@ class ProductController extends Controller
             'price' => $request->price,
             'status' => $request->status,
             'quantity' => $request->quantity,
-            'id_promotion' => $request->promotion,
-            'id_category' => $request->category,
+            'promotion_id' => $request->promotion,
+            'category_id' => $request->category,
         ]);
         ParameterProducts::create([
             'id_product' => $product->id,

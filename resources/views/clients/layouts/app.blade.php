@@ -26,8 +26,8 @@
 
     {{-- Boostrap 5 --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link id="rtl-link" rel="stylesheet" type="text/css"
-        href="{{ asset('clients_assets/css/vendors/bootstrap.css') }}">
+    {{-- <link id="rtl-link" rel="stylesheet" type="text/css"
+        href="{{ asset('clients_assets/css/vendors/bootstrap.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('clients_assets/css/vendors/ion.rangeSlider.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('clients_assets/css/vendors/font-awesome.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('clients_assets/css/vendors/feather-icon.css') }}">
@@ -50,7 +50,7 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="{{ asset('clients_assets/css/custom.css') }}">
 
 
 </head>
@@ -73,8 +73,12 @@
             min-width: 250px;
         }
 
+        body {
+            background-color: rgb(243, 243, 243) !important;
+        }
+
         .name-usr {
-            background: #e87316;
+            background: var(--theme-color);
             padding: 8px 12px;
             color: #fff;
             font-weight: bold;
@@ -84,6 +88,10 @@
 
         .name-usr span {
             margin-right: 10px;
+        }
+
+        .owl-carousel {
+            display: flex !important;
         }
 
         @media (max-width:600px) {
@@ -112,7 +120,6 @@
     </style>
     @include('clients.layouts.header')
     @yield('contents')
-    <div id="qvmodal"></div>
     @include('clients.layouts.footer')
     <div class="tap-to-top">
         <a href="#home">

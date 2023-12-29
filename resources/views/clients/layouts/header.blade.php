@@ -1,12 +1,29 @@
 <header class="header-style-2" id="home">
-    <div class="main-header navbar-searchbar">
+    <div class="header-top">
+        <div class="d-flex justify-content-end align-items-center ms-auto theme-bg-color" style="height: 50px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-phone text-white">
+                <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                </path>
+            </svg><span class=" ms-2 me-5 text-white">(086) 8411902</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-mail text-white">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+            </svg><span class="ms-2 me-5 text-white">trmkhang2001@gmail.com</span>
+        </div>
+    </div>
+    <div class="main-header navbar-searchbar bg-white mb-1">
         <div class="container-fluid-lg">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="main-menu">
                         <div class="menu-left">
                             <div class="brand-logo">
-                                <a href="index.htm">
+                                <a href="/">
                                     <img src="{{ asset('images/logo.png') }}" class="h-logo img-fluid blur-up lazyload"
                                         alt="logo">
                                 </a>
@@ -76,7 +93,7 @@
                                         <div class="onhover-div profile-dropdown">
                                             <ul>
                                                 <li>
-                                                    <a href="login.html" class="d-block">Profile</a>
+                                                    <a href="#" class="d-block">Profile</a>
                                                 </li>
                                                 <li>
                                                     <a href="/logout" class="d-block">Logout</a>
@@ -93,10 +110,10 @@
                                         <div class="onhover-div profile-dropdown">
                                             <ul>
                                                 <li>
-                                                    <a href="login.html" class="d-block">Login</a>
+                                                    <a href="/login" class="d-block">Login</a>
                                                 </li>
                                                 <li>
-                                                    <a href="register.html" class="d-block">Register</a>
+                                                    <a href="/register" class="d-block">Register</a>
                                                 </li>
 
                                             </ul>
@@ -135,25 +152,13 @@
             </a>
         </li>
         <li>
-            <a href="javascript:void(0)">
-                <i data-feather="align-justify"></i>
-                <span>Category</span>
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0)">
+            <a href="/cart">
                 <i data-feather="shopping-bag"></i>
                 <span>Cart</span>
             </a>
         </li>
         <li>
-            <a href="javascript:void(0)">
-                <i data-feather="heart"></i>
-                <span>Wishlist</span>
-            </a>
-        </li>
-        <li>
-            <a href="user-dashboard.php">
+            <a href="/">
                 <i data-feather="user"></i>
                 <span>Account</span>
             </a>

@@ -55,35 +55,27 @@
                             id="kt_ecommerce_sales_table">
                             <thead>
                                 <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                                    <th class="w-10px pe-2 sorting_disabled" rowspan="1" colspan="1" aria-label=""
-                                        style="width: 29.9px;">
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                            <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                                data-kt-check-target="#kt_ecommerce_sales_table .form-check-input"
-                                                value="1">
-                                        </div>
-                                    </th>
-                                    <th class="min-w-100px sorting" tabindex="0" aria-controls="kt_ecommerce_sales_table"
-                                        rowspan="1" colspan="1"
-                                        aria-label="Order ID: activate to sort column ascending" style="width: 80px;">
-                                        Order ID</th>
                                     <th class="min-w-175px sorting" tabindex="0" aria-controls="kt_ecommerce_sales_table"
                                         rowspan="1" colspan="1"
-                                        aria-label="Customer: activate to sort column ascending" style="width: 269.075px;">
-                                        Customer</th>
+                                        aria-label="Customer: activate to sort column ascending" style="width: 169.075px;">
+                                        Khách hàng</th>
                                     <th class=" min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_sales_table"
                                         rowspan="1" colspan="1" style="width: 97.0375px;">
-                                        Phone</th>
+                                        Số điện thoại</th>
                                     <th class=" min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_sales_table"
                                         rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending"
                                         style="width: 97.0375px;">
-                                        Status</th>
+                                        Trạng thái</th>
+                                    <th class="min-w-70px sorting" rowspan="1" colspan="1" style="width: 60px">Cập
+                                        nhật</th>
+                                    <th class="min-w-70px sorting" rowspan="1" colspan="1" style="width: 60px">Hủy đơn
+                                    </th>
                                     <th class=" min-w-100px sorting" tabindex="0" aria-controls="kt_ecommerce_sales_table"
                                         rowspan="1" colspan="1" aria-label="Total: activate to sort column ascending"
                                         style="width: 132.663px;">
-                                        Total</th>
+                                        Tổng tiền</th>
                                     <th class=" min-w-100px sorting" tabindex="0" aria-controls="kt_ecommerce_sales_table"
-                                        rowspan="1" colspan="1" style="width: 132.663px;">Order Update</th>
+                                        rowspan="1" colspan="1" style="width: 132.663px;">Ngày Đặt Hàng</th>
                                     <th class=" min-w-100px sorting_disabled" rowspan="1" colspan="1"
                                         aria-label="Actions" style="width: 132.688px;">Actions</th>
                                 </tr>
@@ -91,15 +83,6 @@
                             <tbody class="fw-semibold text-gray-600">
                                 @foreach ($orders as $order)
                                     <tr class="odd">
-                                        <td>
-                                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                <input class="form-check-input" type="checkbox" value="1">
-                                            </div>
-                                        </td>
-                                        <td data-kt-ecommerce-order-filter="order_id">
-                                            <a href="#" class="text-gray-800 text-hover-primary fw-bold">
-                                                {{ $order->id }} </a>
-                                        </td>
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <div class="">
@@ -127,8 +110,34 @@
                                             @elseif($order->status == config('app.order_status.DONE'))
                                                 <div class="badge badge-light-success">Done</div>
                                             @elseif ($order->status == config('app.order_status.CANCEL'))
-                                                <div class="badge badeg-light-danger">Cancel</div>
+                                                <div class="badge badge-light-danger">Cancel</div>
                                             @endif
+                                        </td>
+                                        <td>
+                                            <!--begin::Badges-->
+                                            <form action="" method="POST">
+                                                @csrf
+                                                <input type="id" name="id" value="{{ $order->id }}" hidden>
+                                                @if ($order->status == config('app.order_status.ORDER'))
+                                                    <button class="btn btn-sm fw-bold btn-primary">Ship</button>
+                                                    <!--end::Badges-->
+                                                @elseif ($order->status == config('app.order_status.SHIPPING'))
+                                                    <button class="btn btn-sm fw-bold btn-success">Done</button>
+                                                @elseif($order->status == config('app.order_status.DONE'))
+                                                    <div class="badge badge-light-success">Done</div>
+                                                @endif
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <!--begin::Badges-->
+                                            <form action="" method="POST">
+                                                @csrf
+                                                <input type="id" name="id" value="{{ $order->id }}" hidden>
+                                                <input type="text" name="true_cancel" value="1" hidden>
+                                                @if ($order->status != config('app.order_status.CANCEL') && $order->status == config('app.order_status.ORDER'))
+                                                    <button class="btn btn-sm fw-bold btn-danger">Cancel</button>
+                                                @endif
+                                            </form>
                                         </td>
                                         <td class=" pe-0">
                                             <span class="fw-bold">{{ number_format($order->total) . ' VNĐ' }}</span>
@@ -155,20 +164,27 @@
                                                 <!--end::Menu item-->
 
                                                 <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="/metronic8/demo1/../demo1/apps/ecommerce/sales/edit-order.html"
-                                                        class="menu-link px-3">
-                                                        Edit
-                                                    </a>
-                                                </div>
+                                                @if ($order->status == config('app.order_status.ORDER'))
+                                                    <div class="menu-item px-3">
+                                                        <a href="{{ route('admin.page.order.edit', $order->id) }}"
+                                                            class="menu-link px-3">
+                                                            Edit
+                                                        </a>
+                                                    </div>
+                                                @endif
                                                 <!--end::Menu item-->
 
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a href="#" class="menu-link px-3"
-                                                        data-kt-ecommerce-order-filter="delete_row">
-                                                        Delete
-                                                    </a>
+                                                    <form action="{{ route('admin.page.order.delete', $order->id) }}"
+                                                        method="POST" type="button"
+                                                        onsubmit="return confirm('Bạn chắc chắn muốn xóa ?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="menu-link px-3 btn">
+                                                            Delete
+                                                        </button>
+                                                    </form>
                                                 </div>
                                                 <!--end::Menu item-->
                                             </div>
@@ -180,48 +196,6 @@
                             </tbody>
                         </table>
                     </div>
-                    {{-- <div class="row">
-                        <div
-                            class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
-                            <div class="dataTables_length" id="kt_ecommerce_sales_table_length"><label><select
-                                        name="kt_ecommerce_sales_table_length" aria-controls="kt_ecommerce_sales_table"
-                                        class="form-select form-select-sm form-select-solid">
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select></label></div>
-                        </div>
-                        <div
-                            class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
-                            <div class="dataTables_paginate paging_simple_numbers" id="kt_ecommerce_sales_table_paginate">
-                                <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled"
-                                        id="kt_ecommerce_sales_table_previous"><a href="#"
-                                            aria-controls="kt_ecommerce_sales_table" data-dt-idx="0" tabindex="0"
-                                            class="page-link"><i class="previous"></i></a></li>
-                                    <li class="paginate_button page-item active"><a href="#"
-                                            aria-controls="kt_ecommerce_sales_table" data-dt-idx="1" tabindex="0"
-                                            class="page-link">1</a></li>
-                                    <li class="paginate_button page-item "><a href="#"
-                                            aria-controls="kt_ecommerce_sales_table" data-dt-idx="2" tabindex="0"
-                                            class="page-link">2</a></li>
-                                    <li class="paginate_button page-item "><a href="#"
-                                            aria-controls="kt_ecommerce_sales_table" data-dt-idx="3" tabindex="0"
-                                            class="page-link">3</a></li>
-                                    <li class="paginate_button page-item "><a href="#"
-                                            aria-controls="kt_ecommerce_sales_table" data-dt-idx="4" tabindex="0"
-                                            class="page-link">4</a></li>
-                                    <li class="paginate_button page-item "><a href="#"
-                                            aria-controls="kt_ecommerce_sales_table" data-dt-idx="5" tabindex="0"
-                                            class="page-link">5</a></li>
-                                    <li class="paginate_button page-item next" id="kt_ecommerce_sales_table_next"><a
-                                            href="#" aria-controls="kt_ecommerce_sales_table" data-dt-idx="6"
-                                            tabindex="0" class="page-link"><i class="next"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div> --}}
                 </div>
                 <!--end::Table-->
             </div>

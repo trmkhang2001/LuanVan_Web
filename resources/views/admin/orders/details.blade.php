@@ -1,3 +1,4 @@
+<?php $total = 0; ?>
 @extends('admin.layouts.app')
 @section('title_page')
     <div class="app-navbar-item ms-1 ms-md-3">
@@ -32,12 +33,9 @@
             <div class="d-flex flex-column gap-7 gap-lg-10">
                 <div class="d-flex flex-wrap flex-stack gap-5 gap-lg-10">
                     <!--begin::Button-->
-                    <a href="/admin/order" class="btn btn-icon btn-light btn-active-secondary btn-sm ms-auto">
-                        <i class="ki-duotone ki-left fs-2"></i> </a>
-                    <!--end::Button-->
-
-                    <!--begin::Button-->
-                    <a href="" class="btn btn-success btn-sm">Edit Order</a>
+                    <a href="/admin/order" class="btn btn-light btn-active-secondary btn-sm ms-auto"><i
+                            class="ki-duotone ki-left fs-2"></i>Quay
+                        lại</a>
                     <!--end::Button-->
                 </div>
                 <!--begin::Tab content-->
@@ -60,13 +58,13 @@
                                     <!--begin::Card header-->
                                     <div class="card-header">
                                         <div class="card-title">
-                                            <h2>Shipping Address</h2>
+                                            <h2>Địa chỉ giao hàng:</h2>
                                         </div>
                                     </div>
                                     <!--end::Card header-->
 
                                     <!--begin::Card body-->
-                                    <div class="card-body pt-0">
+                                    <div class="card-body pt-0 fw-bold">
                                         {{ $order->address }},<br>
                                         {{ $order->ward }},<br>
                                         {{ $order->district }},<br>
@@ -75,6 +73,33 @@
                                     <!--end::Card body-->
                                 </div>
                                 <!--end::Shipping address-->
+                                <!--begin::Khach hang info-->
+                                <div class="card card-flush py-4 flex-row-fluid position-relative">
+                                    <!--begin::Background-->
+                                    <div
+                                        class="position-absolute top-0 end-0 bottom-0 opacity-10 d-flex align-items-center me-5">
+                                        <i class="ki-solid ki-delivery" style="font-size: 13em">
+                                        </i>
+                                    </div>
+                                    <!--end::Background-->
+
+                                    <!--begin::Card header-->
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <h2>Thông tin khách hàng:</h2>
+                                        </div>
+                                    </div>
+                                    <!--end::Card header-->
+
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0 fw-bold">
+                                        {{ $order->name }},<br>
+                                        {{ $order->phone }},<br>
+                                        {{ $order->email }}.<br>
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
+                                <!--end::Khach hang info-->
                             </div>
 
                             <!--begin::Product List-->
@@ -94,14 +119,16 @@
                                         <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0">
                                             <thead>
                                                 <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                                                    <th class="min-w-175px">Product</th>
+                                                    <th class="min-w-175px">Tên sản phẩm</th>
                                                     <th class="min-w-100px ">SKU</th>
-                                                    <th class="min-w-70px ">Qty</th>
-                                                    <th class="min-w-100px ">Total</th>
+                                                    <th class="min-w-70px ">Số lượng</th>
+                                                    <th class="min-w-100px ">Giá</th>
+                                                    <th class="min-w-100px">Ngày mua </th>
                                                 </tr>
                                             </thead>
                                             <tbody class="fw-semibold text-gray-600">
                                                 @foreach ($products as $product)
+                                                    <?php $total += $product->price; ?>
                                                     <tr>
                                                         <td>
                                                             <div class="d-flex align-items-center">
@@ -114,7 +141,7 @@
 
                                                                 <!--begin::Title-->
                                                                 <div class="ms-5">
-                                                                    <a href="/metronic8/demo1/../demo1/apps/ecommerce/catalog/edit-product.html"
+                                                                    <a href="#"
                                                                         class="fw-bold text-gray-600 text-hover-primary">{{ $product->name }}</a>
                                                                 </div>
                                                                 <!--end::Title-->
@@ -126,16 +153,19 @@
                                                             {{ $product->quantity }}
                                                         </td>
                                                         <td class="">
-                                                            {{ number_format($product->price) . ' VNĐ' }}
+                                                            {{ number_format($total) . ' VNĐ' }}
+                                                        </td>
+                                                        <td>
+                                                            {{ date('d/m/Y', strtotime($product->created_at)) }}
                                                         </td>
                                                     </tr>
                                                 @endforeach
                                                 <tr>
                                                     <td colspan="4" class="">
-                                                        Subtotal
+                                                        Tổng giá sản phẩm
                                                     </td>
                                                     <td class="">
-                                                        $264.00
+                                                        {{ number_format($total) . ' VNĐ' }}
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -143,23 +173,23 @@
                                                         VAT (0%)
                                                     </td>
                                                     <td class="">
-                                                        $0.00
+                                                        0 VNĐ
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="4" class="">
-                                                        Shipping Rate
+                                                        Phí ship
                                                     </td>
                                                     <td class="">
-                                                        $5.00
+                                                        {{ number_format(config('app.ship.PRICE')) . ' VNĐ' }}
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="4" class="fs-3 text-gray-900 ">
-                                                        Grand Total
+                                                        Tổng giá:
                                                     </td>
                                                     <td class="text-gray-900 fs-3 fw-bolder ">
-                                                        $269.00
+                                                        {{ number_format($order->total) . ' VNĐ' }}
                                                     </td>
                                                 </tr>
                                             </tbody>

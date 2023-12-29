@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\Promotion;
+use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -20,7 +21,8 @@ class ClientsController extends Controller
     public function index()
     {
         $items = Product::paginate(8);
-        return view('clients.pages.home', ['items' => $items]);
+        $suppliers = Supplier::all();
+        return view('clients.pages.home', ['items' => $items, 'suppliers' => $suppliers]);
     }
     public function page_product(Request $request)
     {
@@ -90,7 +92,7 @@ class ClientsController extends Controller
             'ward' => 'required',
         ]);
         $carts = Cart::instance('cart')->content();
-        $total = 0;
+        $total = config('app.ship.PRICE');
         foreach ($carts as $cart) {
             $total += $cart->price;
         }
@@ -120,5 +122,9 @@ class ClientsController extends Controller
             }
             return redirect()->route('client.page.cart');
         }
+    }
+    public function nopermision()
+    {
+        return view('clients.pages.norpermission');
     }
 }

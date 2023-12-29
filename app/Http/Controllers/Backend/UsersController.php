@@ -14,7 +14,7 @@ class UsersController extends Controller
     //
     public function index()
     {
-        $items = User::paginate(3);
+        $items = User::with('role')->paginate(5);
         return view('admin.user.index', compact('items'));
     }
     public function search(Request $request)

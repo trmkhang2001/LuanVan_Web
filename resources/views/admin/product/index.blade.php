@@ -100,14 +100,6 @@
                             id="kt_ecommerce_products_table">
                             <thead>
                                 <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                                    <th class="w-10px pe-2 sorting_disabled" rowspan="1" colspan="1" aria-label=" "
-                                        style="width: 29.9px;">
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                            <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                                data-kt-check-target="#kt_ecommerce_products_table .form-check-input"
-                                                value="1">
-                                        </div>
-                                    </th>
                                     <th class="min-w-200px sorting" tabindex="0"
                                         aria-controls="kt_ecommerce_products_table" rowspan="1" colspan="1"
                                         aria-label="Product: activate to sort column ascending" style="width: 259.913px;">
@@ -143,15 +135,9 @@
                                 @foreach ($items as $product)
                                     <tr class="odd">
                                         <td>
-                                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                <input class="form-check-input" type="checkbox" value="1">
-                                            </div>
-                                        </td>
-                                        <td>
                                             <div class="d-flex align-items-center">
                                                 <!--begin::Thumbnail-->
-                                                <a href="/metronic8/demo1/../demo1/apps/ecommerce/catalog/edit-product.html"
-                                                    class="symbol symbol-50px">
+                                                <a href="#" class="symbol symbol-50px">
                                                     <span class="symbol-label"
                                                         style="background-image:url({{ $product->img }});"></span>
                                                 </a>

@@ -88,16 +88,48 @@
                                                     <i class="ki-duotone ki-pencil fs-2"><span class="path1"></span><span
                                                             class="path2"></span></i> </a>
                                                 <form action="{{ route('admin.page.category.delete', $category->id) }}"
-                                                    method="POST" type="button"
-                                                    onsubmit="return confirm('Bạn chắc chắn muốn xóa ?')">
+                                                    method="POST" type="button">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit"
-                                                        class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                                                    <button type="button"
+                                                        class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
+                                                        data-bs-toggle="modal" data-bs-target="#modalDelete">
                                                         <i class="ki-duotone ki-trash fs-2"><span
                                                                 class="path1"></span><span class="path2"></span><span
                                                                 class="path3"></span><span class="path4"></span><span
-                                                                class="path5"></span></i> </a>
+                                                                class="path5"></span></i> </a> </button>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="modalDelete" tabindex="-1"
+                                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Cảnh báo
+                                                                        !</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div
+                                                                    class="modal-body d-flex flex-column justify-content-center">
+                                                                    <div class="">
+                                                                        <span>Bạn vấn muốn xóa danh mục ?</span>
+                                                                    </div>
+                                                                    <div class="">
+                                                                        <span class="text-danger">Các sản phẩm
+                                                                            trong danh mục, các sản phẩm củng sẽ bị xóa khỏi
+                                                                            cơ
+                                                                            sở dữ liệu ! !</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Close</button>
+                                                                    <button type="submit"
+                                                                        class="btn btn-primary">Delete</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </form>
                                             </div>
                                         </td>
@@ -111,6 +143,9 @@
                         </tbody>
                         <!--end::Table body-->
                     </table>
+                    <div class="">
+                        {{ $categorys->links() }}
+                    </div>
                     <!--end::Table-->
                 </div>
                 <!--end::Table container-->

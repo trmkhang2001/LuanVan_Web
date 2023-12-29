@@ -14,8 +14,9 @@ return [
     | any other location as required by the application or its packages.
     |
     */
-    'role' => ['ADMIN' => '1', 'MANAGER' => '2', 'EMPLOYEE' => '3', 'USER' => '4'],
+    'role' => ['ADMIN' => '1', 'EMPLOYEE' => '2', 'USER' => '3'],
     'status' => ['ACTIVE' => '1', 'DEACTIVE' => '0'],
+    'ship' => ['PRICE' => '150000'],
 
     /*
     |--------------------------------------------------------------------------

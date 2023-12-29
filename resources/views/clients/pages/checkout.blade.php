@@ -145,7 +145,7 @@
                                 </div>
                                 <span>Thành tiền</span>
                             </li>
-                            <?php $total = 0; ?>
+                            <?php $total = config('app.ship.PRICE'); ?>
                             @foreach ($cartItems as $item)
                                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                                     <div class="text-dark">
@@ -156,6 +156,18 @@
                                 </li>
                                 <?php $total += $item->price; ?>
                             @endforeach
+                            <li class="list-group-item d-flex lh-condensed justify-content-between">
+                                <span class="fw-bold">Phí ship (VNĐ)</span>
+                                <strong>
+                                    {{ number_format(config('app.ship.PRICE')) . ' VNĐ' }}
+                                </strong>
+                            </li>
+                            <li class="list-group-item d-flex lh-condensed justify-content-between">
+                                <span class="fw-bold">VAT (0%)</span>
+                                <strong>
+                                    0 VNĐ
+                                </strong>
+                            </li>
                             <li class="list-group-item d-flex lh-condensed justify-content-between">
                                 <span class="fw-bold">Tổng cộng (VNĐ)</span>
                                 <strong>

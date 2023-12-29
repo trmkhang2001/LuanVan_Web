@@ -236,9 +236,7 @@
                                         name="category">
                                         <option></option>
                                         @foreach ($categorys as $category)
-                                            <option {{ 'value=' . $category->id }}
-                                                @if (isset($product)) @if ($product->id_category == $category->id) {{ 'selected' }} @endif
-                                                @endif>
+                                            <option {{ 'value=' . $category->id }}>
                                                 {{ $category->name }}</option>
                                         @endforeach
                                     </select>

@@ -33,7 +33,7 @@ class AuthController extends Controller
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
             'created_at' => date('Y-m-d H:i:s'),
-            'role' => config('app.role.USER')
+            'role_id' => config('app.role.USER')
         ]);
 
         return redirect()->route('login');
@@ -65,7 +65,7 @@ class AuthController extends Controller
         }
 
         $request->session()->regenerate();
-        if (Auth::user()->role == 4) {
+        if (Auth::user()->role_id == config('app.role.USER')) {
             return redirect('/');
         } else {
             return redirect('/admin');

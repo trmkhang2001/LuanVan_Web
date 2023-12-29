@@ -59,15 +59,10 @@
                         <thead>
                             <tr class="fw-bold text-muted">
                                 <th class="w-25px">
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
-                                            data-kt-check-target=".widget-9-check">
-                                    </div>
                                 </th>
                                 <th class="min-w-25px">ID</th>
+                                <th>IMG</th>
                                 <th class="min-w-150px">NAME</th>
-                                <th class="min-w-150px">Email</th>
-                                <th class="min-w-150px">Phone</th>
                                 <th class="min-w-150px">Status</th>
                                 <th class="min-w-100px">ACTIONS</th>
                             </tr>
@@ -80,27 +75,18 @@
                                 @foreach ($suppliers as $supplier)
                                     <tr>
                                         <td>
-                                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                <input class="form-check-input widget-9-check" type="checkbox"
-                                                    value="1">
-                                            </div>
                                         </td>
-
                                         <td>
                                             <span
                                                 class="text-gray-900 fw-bold text-hover-primary d-block fs-6">{{ $supplier->id }}</span>
                                         </td>
+                                        <td> <a href="#" class="symbol symbol-100px">
+                                                <span class="symbol-label"
+                                                    style="background-image:url({{ $supplier->img }});"></span>
+                                            </a></td>
                                         <td>
                                             <span
                                                 class="text-gray-900 fw-bold text-hover-primary d-block fs-6">{{ $supplier->name }}</span>
-                                        </td>
-                                        <td>
-                                            <span
-                                                class="text-gray-900 fw-bold text-hover-primary d-block fs-6">{{ $supplier->email }}</span>
-                                        </td>
-                                        <td>
-                                            <span
-                                                class="text-gray-900 fw-bold text-hover-primary d-block fs-6">{{ $supplier->phone }}</span>
                                         </td>
                                         <td>
                                             <span class="text-gray-900 fw-bold text-hover-primary d-block fs-6">

@@ -22,6 +22,14 @@ class Order extends Model
     {
         return $this->hasOne(Transaction::class);
     }
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($order) {
+            $order->orderItems()->delete();
+        });
+    }
     protected $fillable = [
         'user_id',
         'total',

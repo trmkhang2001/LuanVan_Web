@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Supplier;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SupplierController extends Controller
@@ -21,15 +22,18 @@ class SupplierController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
+            'img' => 'required',
             'status' => 'required',
             'description' => 'required',
         ]);
+        $file = $request->img;
+        $timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
+        $name = $timestamp . '-' . $file->getClientOriginalName();
+        $url_img = '/images/' . $name;
+        $request->img->move(public_path('images'), $name);
         Supplier::create([
             'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
+            'img' => $url_img,
             'description' => $request->description,
             'status' => $request->status,
         ]);
@@ -42,8 +46,13 @@ class SupplierController extends Controller
     }
     public function update(Request $request, string $id)
     {
+        $file = $request->img;
+        $timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
+        $name = $timestamp . '-' . $file->getClientOriginalName();
+        $url_img = '/images/' . $name;
+        $request->img->move(public_path('images'), $name);
         $supplier = Supplier::findOrFail($id);
-        $supplier->update($request->all());
+        $supplier->update([$request->all(), 'img' => $url_img]);
         return redirect()->route('admin.page.supplier.index')->with('success', 'Update Category Success');
     }
     public function destroy(string $id)

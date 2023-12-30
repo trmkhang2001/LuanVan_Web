@@ -32,7 +32,7 @@
         </div>
     </section>
     <!-- Shop Section start -->
-    <section class="section-b-space">
+    <div class="container-fluid bg-white pt-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 category-side col-md-4">
@@ -149,7 +149,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
     <!-- Shop Section end -->
     <div id="qvmodal"></div>
 

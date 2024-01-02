@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\ImagesProduct;
 use App\Models\ParameterProducts;
 use App\Models\Product;
 use App\Models\Promotion;

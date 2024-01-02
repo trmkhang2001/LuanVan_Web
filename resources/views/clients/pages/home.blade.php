@@ -1,15 +1,5 @@
 @extends('clients.layouts.app')
 @section('contents')
-    <style>
-        .item_product:hover {
-            border: 5px solid #3278f6;
-        }
-
-        .pd-name:hover {
-            cursor: pointer;
-            color: red;
-        }
-    </style>
     @include('clients.layouts.banner')
     <div class="container p-sm-0 bg-white mt-5">
         <div class="row g-sm-4 g-3 px-5 mb-4">
@@ -25,10 +15,13 @@
                 <div class="col-3 mb-4">
                     <div class="card item_product">
                         <div class="card-header">
-                            <img src="{{ $product->img }}" class="card-img-top" alt="...">
+                            <a href="{{ route('client.page.detail', $product->id) }}">
+                                <img src="{{ $product->img }}" class="card-img-top" alt="...">
+                            </a>
                         </div>
                         <div class="card-body">
-                            <span class="fs-5 fw-bold text-uppercase pd-name">{{ $product->name }}</span>
+                            <a href="{{ route('client.page.detail', $product->id) }}"
+                                class="fs-5 fw-bold text-uppercase pd-name">{{ $product->name }}</a>
                             <p class=" fs-6 text-decoration-line-through"> 10,000,000 đ</p>
                             <p class="fs-6 fw-bold text-danger">{{ number_format($product->price) . ' đ' }}</p>
                         </div>

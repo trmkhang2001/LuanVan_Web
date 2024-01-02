@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\ParameterProducts;
 use App\Models\Product;
 use App\Models\Promotion;
 use App\Models\Supplier;
@@ -20,7 +21,7 @@ class ClientsController extends Controller
     //   
     public function index()
     {
-        $items = Product::paginate(8);
+        $items = Product::orderBy('created_at', 'desc')->paginate(8);
         $suppliers = Supplier::all();
         return view('clients.pages.home', ['items' => $items, 'suppliers' => $suppliers]);
     }
@@ -35,16 +36,21 @@ class ClientsController extends Controller
         $to  = explode(",", $prange)[1];
         $q_categories = $request->query("categories");
         if ($q_categories) {
-            $items = Product::where('category_id', explode(',', $q_categories))->whereBetween('price', array($from, $to))->paginate(10);
+            $items = Product::orderBy('created_at', 'desc')->where('category_id', explode(',', $q_categories))->whereBetween('price', array($from, $to))->paginate(10);
         } else {
-            $items = Product::whereBetween('price', array($from, $to))->whereBetween('price', array($from, $to))->paginate(10);
+            $items = Product::orderBy('created_at', 'desc')->whereBetween('price', array($from, $to))->whereBetween('price', array($from, $to))->paginate(10);
         }
         return view('clients.pages.shop', ['items' => $items, 'categorys' => $categorys, 'promotions' => $promotions, 'q_categories' => $q_categories, 'from' => $from, 'to' => $to]);
+    }
+    public function about()
+    {
+        return view('clients.pages.about');
     }
     public function detail(String $id)
     {
         $product = Product::with('category')->find($id);
-        return view('clients.pages.detail_product', ['product' => $product]);
+        $param = ParameterProducts::where('id_product', $id)->first();
+        return view('clients.pages.detail_product', ['product' => $product, 'param' => $param]);
     }
     public function cart()
     {

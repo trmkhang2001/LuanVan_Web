@@ -34,6 +34,7 @@ Route::controller(ClientsController::class)->group(function () {
     Route::get('/cart/checkout', 'checkOut')->name('client.cart.checkout');
     Route::post('/cart/checkout', 'order');
     Route::get('/nopermision', 'nopermision')->name('nopermision');
+    Route::get('/about', 'about');
 });
 Route::controller(AuthController::class)->group(function () {
     Route::get('login', 'login')->name('login');

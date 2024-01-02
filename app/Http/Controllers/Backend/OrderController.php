@@ -22,7 +22,7 @@ class OrderController extends Controller
     public function updateStatus(Request $request)
     {
         $id = $request->id;
-        $order = Order::findOrFail($id);
+        $order = Order::with('orderItems')->findOrFail($id);
         if ($request->true_cancel) {
             $order->status = config('app.order_status.CANCEL');
             $order->update();
@@ -30,6 +30,11 @@ class OrderController extends Controller
         }
         switch ($order->status) {
             case config('app.order_status.ORDER'):
+                foreach ($order->orderItems as $item) {
+                    $product = Product::findOrFail($item->product_id);
+                    $product->quantity -= $item->quantity;
+                    $product->update();
+                }
                 $order->status = config('app.order_status.SHIPPING');
                 $order->update();
                 return redirect()->back();

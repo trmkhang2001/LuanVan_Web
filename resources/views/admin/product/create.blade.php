@@ -311,7 +311,7 @@
                                                     <!--begin::Input-->
                                                     <input type="text" name="name" class="form-control mb-2"
                                                         placeholder="Product name"
-                                                        value = "@if (isset($product)) {{ $product->name }} @endif" />
+                                                        value = "@if (isset($product)) {{ $product->name }} @endif {{ old('name') }}" />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">A product name is required and recommended
@@ -329,6 +329,7 @@
 @if (isset($product))
 {{ $product->description }}
 @endif
+{{ old('name') }}
 </textarea>
                                                     <!--end::Editor-->
                                                     <!--begin::Description-->
@@ -341,49 +342,6 @@
                                             <!--end::Card header-->
                                         </div>
                                         <!--end::General options-->
-                                        <!--begin::Media-->
-                                        <div class="card card-flush py-4">
-                                            <!--begin::Card header-->
-                                            <div class="card-header">
-                                                <div class="card-title">
-                                                    <h2>Media</h2>
-                                                </div>
-                                            </div>
-                                            <!--end::Card header-->
-                                            <!--begin::Card body-->
-                                            <div class="card-body pt-0">
-                                                <!--begin::Input group-->
-                                                <div class="fv-row mb-2">
-                                                    <!--begin::Dropzone-->
-                                                    <div class="dropzone" id="kt_ecommerce_add_product_media">
-                                                        <!--begin::Message-->
-                                                        <div class="dz-message needsclick">
-                                                            <!--begin::Icon-->
-                                                            <i class="ki-duotone ki-file-up text-primary fs-3x">
-                                                                <span class="path1"></span>
-                                                                <span class="path2"></span>
-                                                            </i>
-                                                            <!--end::Icon-->
-                                                            <!--begin::Info-->
-                                                            <div class="ms-4">
-                                                                <h3 class="fs-5 fw-bold text-gray-900 mb-1">Drop files here
-                                                                    or click to upload.</h3>
-                                                                <span class="fs-7 fw-semibold text-gray-400">Upload up to
-                                                                    10 files</span>
-                                                            </div>
-                                                            <!--end::Info-->
-                                                        </div>
-                                                    </div>
-                                                    <!--end::Dropzone-->
-                                                </div>
-                                                <!--end::Input group-->
-                                                <!--begin::Description-->
-                                                <div class="text-muted fs-7">Set the product media gallery.</div>
-                                                <!--end::Description-->
-                                            </div>
-                                            <!--end::Card header-->
-                                        </div>
-                                        <!--end::Media-->
                                         <!--begin::Pricing-->
                                         <div class="card card-flush py-4">
                                             <!--begin::Card header-->
@@ -403,7 +361,7 @@
                                                     <!--begin::Input-->
                                                     <input type="text" name="price" class="form-control mb-2"
                                                         placeholder="Product price"
-                                                        value = "@if (isset($product)) {{ $product->price }} @endif" />
+                                                        value = "@if (isset($product)) {{ $product->price }} @endif {{ old('price') }}" />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">Set the product price.</div>
@@ -433,7 +391,7 @@
                                                     <!--begin::Input-->
                                                     <input type="text" name="sku" class="form-control mb-2"
                                                         placeholder="SKU Number"
-                                                        value = "@if (isset($product)) {{ $product->sku }} @endif" />
+                                                        value = "@if (isset($product)) {{ $product->sku }} @endif {{ old('sku') }}" />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">Enter the product SKU.</div>
@@ -449,7 +407,7 @@
                                                     <div class="d-flex gap-3">
                                                         <input type="number" name="quantity" class="form-control mb-2"
                                                             placeholder="On shelf"
-                                                            @if (isset($product)) {{ 'value=' . number_format($product->quantity) }} @endif />
+                                                            @if (isset($product)) {{ 'value=' . number_format($product->quantity) }} @else {{ old('quantity') }} @endif />
                                                     </div>
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
@@ -480,7 +438,7 @@
                                                     <!--begin::Input-->
                                                     <input type="text" name="main" class="form-control mb-2"
                                                         placeholder="Mainboard"
-                                                        value = "@if (isset($parameter)) {{ $parameter->main }} @endif" />
+                                                        value = "@if (isset($parameter)) {{ $parameter->main }} @endif {{ old('main') }}" />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">Mainboard .</div>
@@ -495,7 +453,7 @@
                                                     <!--begin::Input-->
                                                     <input type="text" name="cpu" class="form-control mb-2"
                                                         placeholder="CPU"
-                                                        value = "@if (isset($parameter)) {{ $parameter->cpu }} @endif" />
+                                                        value = "@if (isset($parameter)) {{ $parameter->cpu }} @endif {{ old('cpu') }}" />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">CPU .</div>
@@ -510,7 +468,7 @@
                                                     <!--begin::Input-->
                                                     <input type="text" name="ram" class="form-control mb-2"
                                                         placeholder="Ram"
-                                                        value = "@if (isset($parameter)) {{ $parameter->ram }} @endif" />
+                                                        value = "@if (isset($parameter)) {{ $parameter->ram }} @endif {{ old('ram') }}" />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">RAM .</div>
@@ -525,7 +483,7 @@
                                                     <!--begin::Input-->
                                                     <input type="text" name="vga" class="form-control mb-2"
                                                         placeholder="VGA"
-                                                        value = "@if (isset($parameter)) {{ $parameter->vga }} @endif" />
+                                                        value = "@if (isset($parameter)) {{ $parameter->vga }} @endif {{ old('vga') }}" />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">VGA .</div>
@@ -540,7 +498,7 @@
                                                     <!--begin::Input-->
                                                     <input type="text" name="hhd" class="form-control mb-2"
                                                         placeholder="HDD"
-                                                        value = "@if (isset($parameter)) {{ $parameter->hhd }} @endif" />
+                                                        value = "@if (isset($parameter)) {{ $parameter->hhd }} @endif {{ old('hdd') }}" />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">HDD .</div>
@@ -555,7 +513,7 @@
                                                     <!--begin::Input-->
                                                     <input type="text" name="ssd" class="form-control mb-2"
                                                         placeholder="SSD"
-                                                        value = "@if (isset($parameter)) {{ $parameter->ssd }} @endif" />
+                                                        value = "@if (isset($parameter)) {{ $parameter->ssd }} @endif {{ old('ssd') }}" />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">SSD .</div>
@@ -570,7 +528,7 @@
                                                     <!--begin::Input-->
                                                     <input type="text" name="psu" class="form-control mb-2"
                                                         placeholder="PSU"
-                                                        value = "@if (isset($parameter)) {{ $parameter->psu }} @endif" />
+                                                        value = "@if (isset($parameter)) {{ $parameter->psu }} @endif {{ old('psu') }}" />
                                                     <!--end::Input-->
                                                     <!--begin::Description-->
                                                     <div class="text-muted fs-7">PSU .</div>

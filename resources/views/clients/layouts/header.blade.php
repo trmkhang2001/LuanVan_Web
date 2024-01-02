@@ -48,10 +48,8 @@
                                         </li>
                                         <li><a href="/product" class="nav-link menu-title fs-5 fw-bold">Mua hàng</a>
                                         </li>
-                                        <li><a href="about-us.html" class="nav-link menu-title fs-5 fw-bold">Giới
+                                        <li><a href="/about" class="nav-link menu-title fs-5 fw-bold">Giới
                                                 thiệu</a>
-                                        </li>
-                                        <li><a href="blog.html" class="nav-link menu-title fs-5 fw-bold">Tin tức</a>
                                         </li>
                                     </ul>
                                 </div>

@@ -44,6 +44,16 @@
             max-width: 220px !important;
         }
 
+        .item_product:hover {
+            border: 5px solid #3278f6;
+            cursor: pointer;
+        }
+
+        .pd-name:hover {
+            cursor: pointer;
+            color: red;
+        }
+
         @media only screen and (max-width: 600px) {
             .h-logo {
                 max-width: 110px !important;

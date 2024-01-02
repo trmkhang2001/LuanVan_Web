@@ -1,6 +1,6 @@
 @extends('clients.layouts.app')
 @section('contents')
-    <section class="breadcrumb-section section-b-space" style="padding-top:20px;padding-bottom:20px;">
+    <div class="breadcrumb-section section-b-space" style="padding-top:20px;padding-bottom:20px;">
         <ul class="circles">
             <li></li>
             <li></li>
@@ -30,9 +30,14 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <img src="images/banner_shop.jpg" alt="">
+        </div>
+    </div>
     <!-- Shop Section start -->
-    <div class="container-fluid bg-white pt-5">
+    <div class="container-fluid bg-white py-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 category-side col-md-4">
@@ -89,55 +94,21 @@
 
                 <div class="category-product col-lg-9 col-12 ratio_30">
                     <!-- label and featured section -->
-
                     <!-- Prodcut setion -->
                     <div
                         class="row g-sm-4 g-3 row-cols-lg-4 row-cols-md-3 row-cols-2 mt-1 custom-gy-5 product-style-2 ratio_asos product-list-section">
                         @foreach ($items as $product)
-                            <div class="col-xl-2 col-lg-2 col-6">
-                                <div class="product-box">
-                                    <div class="img-wrapper">
-                                        <a href="{{ route('client.page.detail', $product->id) }}">
-                                            <img src="{{ $product->img }}" class="w-100 bg-img blur-up lazyload"
-                                                alt="">
-                                        </a>
-                                        <div class="circle-shape"></div>
-                                        <span class="background-text">Furniture</span>
-                                        <div class="label-block">
-                                            <span class="label label-theme">30% Off</span>
-                                        </div>
-                                        <div class="cart-wrap">
-                                            <ul>
-                                                <li>
-                                                    <a href="javascript:void(0)" class="addtocart-btn">
-                                                        <i data-feather="shopping-cart"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{ route('client.page.detail', $product->id) }}">
-                                                        <i data-feather="eye"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0)" class="wishlist">
-                                                        <i data-feather="heart"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                            <div class="col-3 mb-4">
+                                <div class="card item_product">
+                                    <div class="card-header">
+                                        <img src="{{ $product->img }}" class="card-img-top" alt="...">
                                     </div>
-                                    <div class="product-style-3 product-style-chair">
-                                        <div class="product-title d-block mb-0">
-                                            <div class="r-price">
-                                                <div class="theme-color">{{ number_format($product->price) . ' VNĐ' }}
-                                                </div>
-                                            </div>
-                                            <p class="font-light mb-sm-2 mb-0">{{ number_format($product->price) . 'VNĐ' }}
-                                            </p>
-                                            <a href="product/details.html" class="font-default">
-                                                <h5>{{ $product->name }}</h5>
-                                            </a>
-                                        </div>
+                                    <div class="card-body">
+                                        <a href="{{ route('client.page.detail', $product->id) }}"
+                                            class="text-dark fs-6 fw-bold text-uppercase pd-name">{{ $product->name }}</a>
+                                        <p class=" fs-6 text-decoration-line-through"> 10,000,000 đ</p>
+                                        <p class="fs-6 fw-bold text-danger">{{ number_format($product->price) . ' đ' }}
+                                        </p>
                                     </div>
                                 </div>
                             </div>

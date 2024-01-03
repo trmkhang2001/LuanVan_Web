@@ -4,7 +4,7 @@
         <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
             <!--begin::Title-->
             <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                Supplier</h1>
+                Banner</h1>
             <!--end::Title-->
             <!--begin::Breadcrumb-->
             <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -19,7 +19,7 @@
                 </li>
                 <!--end::Item-->
                 <!--begin::Item-->
-                <li class="breadcrumb-item text-muted">Supplier</li>
+                <li class="breadcrumb-item text-muted">Banner</li>
                 <!--end::Item-->
             </ul>
             <!--end::Breadcrumb-->
@@ -45,7 +45,7 @@
         <div class="card mb-5 mb-xl-8">
             <div class="card-header border-0 pt-5">
                 <h3 class="card-title align-items-start flex-column">
-                    <span class="card-label fw-bold fs-3 mb-1">Update Supplier</span>
+                    <span class="card-label fw-bold fs-3 mb-1">Update Banner</span>
                 </h3>
             </div>
             <div class="card-body py-3">
@@ -79,7 +79,7 @@
                             <div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3"
                                 data-kt-image-input="true">
                                 <!--begin::Preview existing avatar-->
-                                <div class="image-input-wrapper w-350px h-150px">
+                                <div class="image-fluid image-input-wrapper w-750px h-250px">
                                 </div>
                                 <!--end::Preview existing avatar-->
                                 <!--begin::Label-->
@@ -129,50 +129,44 @@
                     </div>
                     <!--end::Thumbnail settings-->
                     <div class="d-flex flex-column">
-                        <div class="mb-5">
-                            <!--begin::Label-->
-                            <label class="form-label">Name</label>
-                            <!--end::Label-->
+                        <div class="row">
+                            <div class="col-6 mb-5">
+                                <!--begin::Select store template-->
+                                <label for="kt_ecommerce_add_category_store_template" class="form-label">Status</label>
+                                <!--end::Select store template-->
 
-                            <!--begin::Input-->
-                            <input type="text" class="form-control mb-2" name="name" placeholder="Name"
-                                @if (isset($supplier)) {{ 'value=' . $supplier->name }} @endif>
-                            <!--end::Input-->
+                                <!--begin::Select2-->
+                                <select class="form-select mb-2" name="status">
+                                    <option value="1" @if (isset($banner) && $banner->status == config('app.status.ACTIVE')) {{ 'selected' }} @endif>
+                                        Active
+                                    </option>
+                                    <option value="0" @if (isset($banner) && $banner->status == config('app.status.DEACTIVE')) {{ 'selected' }} @endif>
+                                        Deative
+                                    </option>
+                                </select>
+                                <!--end::Select2-->
+                            </div>
+                            <div class="col-6">
+                                <!--begin::Select store template-->
+                                <label for="kt_ecommerce_add_category_store_template" class="form-label">Vị Trí</label>
+                                <!--end::Select store template-->
 
-                            <!--begin::Description-->
-                            {{-- <div class="text-muted fs-7">Set a meta tag title. Recommended to be simple and precise
-                                keywords.</div> --}}
-                            <!--end::Description-->
-                        </div>
-                        <div>
-                            <!--begin::Label-->
-                            <label class="form-label">Description</label>
-                            <!--end::Label-->
-                            <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3">
-                                @if (isset($supplier))
-{{ $supplier->description }}
-@endif
-                                </textarea>
-
-                        </div>
-                        <div class="mb-5">
-                            <!--begin::Select store template-->
-                            <label for="kt_ecommerce_add_category_store_template" class="form-label">Status</label>
-                            <!--end::Select store template-->
-
-                            <!--begin::Select2-->
-                            <select class="form-select mb-2" data-control="select2" data-placeholder="Select an option"
-                                data-allow-clear="true" multiple="multiple" name="status">
-                                <option></option>
-                                <option value="1" @if (isset($supplier) && $supplier->status == config('app.status.ACTIVE')) {{ 'selected' }} @endif>Active
-                                </option>
-                                <option value="0" @if (isset($supplier) && $supplier->status == config('app.status.DEACTIVE')) {{ 'selected' }} @endif>Deative
-                                </option>
-                            </select>
-                            <!--end::Select2-->
+                                <!--begin::Select2-->
+                                <select class="form-select mb-2" name="vitri">
+                                    <option value="{{ config('app.vitri.TRANGHOME') }}"
+                                        @if (isset($banner) && $banner->vitri == config('app.vitri.TRANGHOME')) {{ 'selected' }} @endif>
+                                        Trang Chủ
+                                    </option>
+                                    <option value="{{ config('app.vitri.TRANGSHOP') }}"
+                                        @if (isset($banner) && $banner->vitri == config('app.vitri.TRANGSHOP')) {{ 'selected' }} @endif>
+                                        Trang Shop
+                                    </option>
+                                </select>
+                                <!--end::Select2-->
+                            </div>
                         </div>
                         <div class="mt-5 d-flex justify-content-end">
-                            @if (isset($supplier))
+                            @if (isset($banner))
                                 <div class="mx-5">
                                     <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
@@ -182,7 +176,7 @@
                                 </div>
                             @endif
                             <div class="mx-5">
-                                <a type="submit" href="/admin/supplier" class="btn btn-secondary">Cancel</a>
+                                <a type="submit" href="/admin/banner" class="btn btn-secondary">Cancel</a>
                             </div>
                         </div>
                     </div>

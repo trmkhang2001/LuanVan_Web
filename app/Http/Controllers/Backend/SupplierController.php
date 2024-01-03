@@ -46,13 +46,18 @@ class SupplierController extends Controller
     }
     public function update(Request $request, string $id)
     {
-        $file = $request->img;
-        $timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
-        $name = $timestamp . '-' . $file->getClientOriginalName();
-        $url_img = '/images/' . $name;
-        $request->img->move(public_path('images'), $name);
-        $supplier = Supplier::findOrFail($id);
-        $supplier->update([$request->all(), 'img' => $url_img]);
+        if ($request->img) {
+            $file = $request->img;
+            $timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
+            $name = $timestamp . '-' . $file->getClientOriginalName();
+            $url_img = '/images/' . $name;
+            $request->img->move(public_path('images'), $name);
+            $supplier = Supplier::findOrFail($id);
+            $supplier->update([$request->all(), 'img' => $url_img]);
+        } else {
+            $supplier = Supplier::findOrFail($id);
+            $supplier->update($request->all());
+        }
         return redirect()->route('admin.page.supplier.index')->with('success', 'Update Category Success');
     }
     public function destroy(string $id)

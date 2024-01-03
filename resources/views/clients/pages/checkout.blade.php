@@ -152,9 +152,9 @@
                                         <h6 class="my-0">{{ $item->name }}</h6>
                                         <small></small>
                                     </div>
-                                    <span>{{ number_format($item->price) . ' VNĐ' }}</span>
+                                    <span>{{ number_format($item->price * $item->qty) . ' VNĐ' }}</span>
                                 </li>
-                                <?php $total += $item->price; ?>
+                                <?php $total += $item->price * $item->qty; ?>
                             @endforeach
                             <li class="list-group-item d-flex lh-condensed justify-content-between">
                                 <span class="fw-bold">Phí ship (VNĐ)</span>

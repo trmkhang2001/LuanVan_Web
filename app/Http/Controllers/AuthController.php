@@ -15,7 +15,7 @@ class AuthController extends Controller
 {
     public function register()
     {
-        return view('auth/register');
+        return view('clients.pages.register');
     }
 
     public function registerSave(Request $request)
@@ -48,7 +48,7 @@ class AuthController extends Controller
                 return redirect('/admin');
             }
         }
-        return view('auth.login');
+        return view('clients.pages.login');
     }
 
     public function loginAction(Request $request)

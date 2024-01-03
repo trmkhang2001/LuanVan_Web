@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -22,13 +23,15 @@ class ClientsController extends Controller
     public function index()
     {
         $items = Product::orderBy('created_at', 'desc')->paginate(8);
-        $suppliers = Supplier::all();
-        return view('clients.pages.home', ['items' => $items, 'suppliers' => $suppliers]);
+        $banners = Banner::orderBy('created_at', 'desc')->where('vitri', config('app.vitri.TRANGHOME'))->where('status', config('app.status.ACTIVE'))->get();
+        $suppliers = Supplier::where('status', config('app.status.ACTIVE'))->get();
+        return view('clients.pages.home', ['items' => $items, 'suppliers' => $suppliers, 'banners' => $banners]);
     }
     public function page_product(Request $request)
     {
         $categorys = Category::with('product')->get();
         $promotions = Promotion::with('product')->get();
+        $banners = Banner::orderBy('created_at', 'desc')->where('vitri', config('app.vitri.TRANGSHOP'))->where('status', config('app.status.ACTIVE'))->get();
         $prange = $request->query("prange");
         if (!$prange)
             $prange = "5000000,50000000";
@@ -36,11 +39,11 @@ class ClientsController extends Controller
         $to  = explode(",", $prange)[1];
         $q_categories = $request->query("categories");
         if ($q_categories) {
-            $items = Product::orderBy('created_at', 'desc')->where('category_id', explode(',', $q_categories))->whereBetween('price', array($from, $to))->paginate(10);
+            $items = Product::orderBy('created_at', 'desc')->where('category_id', explode(',', $q_categories))->whereBetween('price', array($from, $to))->paginate(12);
         } else {
-            $items = Product::orderBy('created_at', 'desc')->whereBetween('price', array($from, $to))->whereBetween('price', array($from, $to))->paginate(10);
+            $items = Product::orderBy('created_at', 'desc')->whereBetween('price', array($from, $to))->whereBetween('price', array($from, $to))->paginate(12);
         }
-        return view('clients.pages.shop', ['items' => $items, 'categorys' => $categorys, 'promotions' => $promotions, 'q_categories' => $q_categories, 'from' => $from, 'to' => $to]);
+        return view('clients.pages.shop', ['items' => $items, 'banners' => $banners, 'categorys' => $categorys, 'promotions' => $promotions, 'q_categories' => $q_categories, 'from' => $from, 'to' => $to]);
     }
     public function about()
     {
@@ -97,11 +100,12 @@ class ClientsController extends Controller
             'district' => 'required',
             'ward' => 'required',
         ]);
-        $carts = Cart::instance('cart')->content();
+        $totalcat = Cart::instance('cart')->content();
         $total = config('app.ship.PRICE');
-        foreach ($carts as $cart) {
-            $total += $cart->price;
+        foreach ($totalcat as $cart) {
+            $total += $cart->price * $cart->qty;
         }
+        $carts = Cart::instance('cart')->content();
         if (Auth::check()) {
             $order = Order::create([
                 'user_id' => Auth::user()->id,
@@ -120,7 +124,7 @@ class ClientsController extends Controller
                     OrderItem::create([
                         'product_id' => $cart->id,
                         'order_id' => $order->id,
-                        'price' => $cart->price,
+                        'price' => $cart->price * $cart->qty,
                         'quantity' => $cart->qty,
                     ]);
                 }
@@ -128,6 +132,37 @@ class ClientsController extends Controller
             }
             return redirect()->route('client.page.cart');
         }
+    }
+    public function order_list()
+    {
+        $id = Auth::user()->id;
+        $orders = Order::where('user_id', $id)->paginate(5);
+        return view('clients.pages.order', ['orders' => $orders]);
+    }
+    public function cancel_order(string $id)
+    {
+        $order = Order::with('orderItems')->findOrFail($id);
+        if (Auth::user()->id == $order->user_id) {
+            if ($order->status == config('app.order_status.ORDER')) {
+                $order->status = config('app.order_status.CANCEL');
+                $order->update();
+                return redirect()->back();
+            }
+        }
+        return response();
+    }
+    public function order_detail(string $id)
+    {
+        $order = Order::with('orderItems')->findOrFail($id);
+        $products = [];
+        foreach ($order->orderItems as $item) {
+            $product = Product::findOrFail($item->product_id);
+            $product->quantity = $item->quantity;
+            $product->price = $item->price;
+            $product->created_at = $item->created_at;
+            $products[] = $product;
+        }
+        return view('clients.pages.detail_order', ['order' => $order, 'products' => $products]);
     }
     public function nopermision()
     {

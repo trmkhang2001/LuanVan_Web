@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="MkRqEzTGuoSx6LqJUm0OAKxSgNUYt26wTT7RMUZY">
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="{{ asset('clients_assets/images/favicon.ico') }}">
     <link rel="icon" href="{{ asset('clients_assets/images/favicon.ico') }}" type="image/x-icon">
@@ -12,17 +11,17 @@
     <meta name="theme-color" content="#e87316">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Surfside Media">
+    <meta name="apple-mobile-web-app-title" content="MK Computer">
     <meta name="msapplication-TileImage" content="assets/images/favicon.ico">
     <meta name="msapplication-TileColor" content="#FFFFFF">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Surfside Media">
-    <meta name="keywords" content="Surfside Media">
-    <meta name="author" content="Surfside Media">
+    <meta name="description" content="MK Computer">
+    <meta name="keywords" content="MK Computer">
+    <meta name="author" content="MK Computer">
     <link rel="preconnect" href="https://fonts.gstatic.com">
 
-    <title>SurfsideMedia</title>
+    <title>MK Computer</title>
 
     {{-- Boostrap 5 --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -102,6 +101,31 @@
 
         .owl-carousel {
             display: flex !important;
+        }
+
+        .stt {
+            padding: 5px;
+            border-radius: 15px;
+        }
+
+        .stt-order {
+            color: #7239ea;
+            background-color: #f8f5ff;
+        }
+
+        .stt-shipping {
+            color: #009ef7;
+            background-color: #f1faff;
+        }
+
+        .stt-done {
+            color: #50cd89;
+            background-color: #e8fff3;
+        }
+
+        .stt-cancel {
+            color: #f1416c;
+            background-color: #fff5f8;
         }
 
         @media (max-width:600px) {

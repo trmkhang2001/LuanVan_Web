@@ -5,9 +5,16 @@
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
         <!--begin::Logo image-->
         <a href="/admin">
+            <div class="d-flex flex-wrap app-sidebar-logo-default">
+                <div class="app-sidebar-logo-default">
+                    <img alt="Logo" src="{{ asset('admin_assets/media/logos/default-dark.svg') }}"
+                        class="h-25px " />
+                </div>
+                <div class="app-sidebar-logo-default">
+                    <h2 class="ms-5" style="color: white">Trang Admin</h2>
+                </div>
+            </div>
             <img alt="Logo" src="{{ asset('admin_assets/media/logos/default-dark.svg') }}"
-                class="h-25px app-sidebar-logo-default" />
-            <img alt="Logo" src="{{ asset('admin_assets/media/logos/default-small.svg') }}"
                 class="h-20px app-sidebar-logo-minimize" />
         </a>
         <!--end::Logo image-->
@@ -59,7 +66,7 @@
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion"><!--begin:Menu link--><span
                         class="menu-link"><span class="menu-icon"><i class="ki-duotone ki-basket fs-2"><span
                                     class="path1"></span><span class="path2"></span><span class="path3"></span><span
-                                    class="path4"></span></i></span><span class="menu-title">Store</span><span
+                                    class="path4"></span></i></span><span class="menu-title">Cửa hàng</span><span
                             class="menu-arrow"></span></span><!--end:Menu link-->
                     <!--begin:Menu sub-->
                     <div class="menu-sub menu-sub-accordion" kt-hidden-height="251"
@@ -68,42 +75,60 @@
                         <div class="menu-item">
                             <!--begin:Menu link--><a class="menu-link" href="/admin/user"><span
                                     class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                    class="menu-title">User Management</span></a><!--end:Menu link-->
+                                    class="menu-title">Quản lý user</span></a><!--end:Menu link-->
                         </div>
                         <!--end:Menu item-->
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link--><a class="menu-link" href="/admin/category"><span
                                     class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                    class="menu-title">Category</span></a><!--end:Menu link-->
+                                    class="menu-title">Quản lý danh mục</span></a><!--end:Menu link-->
                         </div>
                         <!--end:Menu item-->
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link--><a class="menu-link" href="/admin/product"><span
                                     class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                    class="menu-title">Products</span></a><!--end:Menu link-->
+                                    class="menu-title">Quản lý sản phẩm</span></a><!--end:Menu link-->
                         </div>
                         <!--end:Menu item-->
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link--><a class="menu-link" href="/admin/order"><span
                                     class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                    class="menu-title">Order Management</span></a><!--end:Menu link-->
+                                    class="menu-title">Quản lý order</span></a><!--end:Menu link-->
                         </div>
                         <!--end:Menu item-->
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link--><a class="menu-link" href="/admin/promotion"><span
                                     class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                    class="menu-title">Promotion</span></a><!--end:Menu link-->
+                                    class="menu-title">Quản lý mã khuyến mãi</span></a><!--end:Menu link-->
                         </div>
                         <!--end:Menu item-->
+                    </div><!--end:Menu sub-->
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion"><!--begin:Menu link--><span
+                        class="menu-link"><span class="menu-icon"><i class="ki-duotone ki-bucket fs-2"><span
+                                    class="path1"></span><span class="path2"></span><span
+                                    class="path3"></span><span class="path4"></span></i></span><span
+                            class="menu-title">Giao diện</span><span
+                            class="menu-arrow"></span></span><!--end:Menu link-->
+                    <!--begin:Menu sub-->
+                    <div class="menu-sub menu-sub-accordion" kt-hidden-height="251"
+                        style="display: none; overflow: hidden;">
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link--><a class="menu-link" href="/admin/supplier"><span
                                     class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                    class="menu-title">Supplier</span></a><!--end:Menu link-->
+                                    class="menu-title">Quản lý thương hiệu</span></a><!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link--><a class="menu-link" href="/admin/banner"><span
+                                    class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
+                                    class="menu-title">Quản lý banner</span></a><!--end:Menu link-->
                         </div>
                         <!--end:Menu item-->
                     </div><!--end:Menu sub-->
@@ -117,11 +142,11 @@
     <!--end::sidebar menu-->
     <!--begin::Footer-->
     <div class="app-sidebar-footer flex-column-auto pt-2 pb-6 px-6" id="kt_app_sidebar_footer">
-        <a href="#"
+        <a href="/"
             class="btn btn-flex flex-center btn-custom btn-primary overflow-hidden text-nowrap px-0 h-40px w-100"
             data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click"
             title="Bài Dự Án Tốt Nghiệp Của Khang">
-            <span class="btn-label">Docs & Components</span>
+            <span class="btn-label">Quay Lại Store</span>
             <i class="ki-duotone ki-document btn-icon fs-2 m-0">
                 <span class="path1"></span>
                 <span class="path2"></span>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\OrderController;
@@ -33,6 +34,9 @@ Route::controller(ClientsController::class)->group(function () {
     Route::delete('/cart/clear', 'clearCart')->name('client.clear.cart');
     Route::get('/cart/checkout', 'checkOut')->name('client.cart.checkout');
     Route::post('/cart/checkout', 'order');
+    Route::get('/order', 'order_list');
+    Route::get('/order_cancel/{id}', 'cancel_order')->name('client.order.cancel');
+    Route::get('/order/{id}', 'order_detail')->name('client.order.detail');
     Route::get('/nopermision', 'nopermision')->name('nopermision');
     Route::get('/about', 'about');
 });
@@ -98,6 +102,13 @@ Route::middleware('auth', 'user-role')->group(function () {
             Route::get('/edit/{id}', 'edit')->name('admin.page.order.edit');
             Route::post('/edit/{id}', 'update');
             Route::delete('/{id}', 'destroy')->name('admin.page.order.delete');
+        });
+        Route::controller(BannerController::class)->prefix('/banner')->group(function () {
+            Route::get('/', 'index')->name('admin.page.banner');
+            Route::get('/add', 'create')->name('admin.page.banner.create');
+            Route::post('/add', 'store');
+            Route::get('/update/{id}', 'edit')->name('admin.page.banner.edit');
+            Route::post('/update/{id}', 'update');
         });
     });
 });

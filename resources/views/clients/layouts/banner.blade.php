@@ -1,15 +1,11 @@
 <section class="pt-0">
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="{{ asset('images/banner_1.jpg') }}" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="{{ asset('images/banner_2.jpg') }}" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="{{ asset('images/banner_3.jpg') }}" class="d-block w-100" alt="...">
-            </div>
+            @foreach ($banners as $key => $banner)
+                <div class="carousel-item @if ($key == 0) {{ 'active' }} @endif">
+                    <img src="{{ $banner->path }}" class="d-block w-100" alt="...">
+                </div>
+            @endforeach
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleSlidesOnly"
             data-bs-slide="prev">

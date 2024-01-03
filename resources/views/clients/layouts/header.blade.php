@@ -86,15 +86,23 @@
                                     <li class="onhover-dropdown">
                                         <div class="cart-media name-usr">
                                             <i data-feather="user"></i>
-                                            <span class="ms-2">Minh Khang</span>
+                                            <span class="ms-2">{{ Auth::user()->name }}</span>
                                         </div>
                                         <div class="onhover-div profile-dropdown">
                                             <ul>
+                                                @if (Auth::user()->role != config('app.role.USER'))
+                                                    <li>
+                                                        <a href="/admin" class="d-block">Admin</a>
+                                                    </li>
+                                                @endif
                                                 <li>
                                                     <a href="#" class="d-block">Profile</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/logout" class="d-block">Logout</a>
+                                                    <a href="/order" class="d-block">Theo dõi đơn hàng</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/logout" class="d-block">Đăng xuất</a>
                                                 </li>
 
                                             </ul>

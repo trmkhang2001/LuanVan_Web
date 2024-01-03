@@ -4,7 +4,7 @@
         <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
             <!--begin::Title-->
             <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                user</h1>
+                User</h1>
             <!--end::Title-->
             <!--begin::Breadcrumb-->
             <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -51,18 +51,20 @@
                     <!--end::Search-->
                 </div>
                 <!--begin::Card title-->
-                <!--begin::Card toolbar-->
-                <div class="card-toolbar">
-                    <!--begin::Toolbar-->
-                    <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                        <!--begin::Add user-->
-                        <a href="/admin/user/add" type="button" class="btn btn-primary">
-                            <i class="ki-duotone ki-plus fs-2"></i>Add User</a>
-                        <!--end::Add user-->
+                @if (Auth::user()->role_id == config('app.role.ADMIN'))
+                    <!--begin::Card toolbar-->
+                    <div class="card-toolbar">
+                        <!--begin::Toolbar-->
+                        <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                            <!--begin::Add user-->
+                            <a href="/admin/user/add" type="button" class="btn btn-primary">
+                                <i class="ki-duotone ki-plus fs-2"></i>Add User</a>
+                            <!--end::Add user-->
+                        </div>
+                        <!--end::Toolbar-->
                     </div>
-                    <!--end::Toolbar-->
-                </div>
-                <!--end::Card toolbar-->
+                    <!--end::Card toolbar-->
+                @endif
             </div>
             <!--end::Card header-->
             <!--begin::Card body-->
@@ -79,7 +81,9 @@
                             <th class="min-w-125px">User</th>
                             <th class="min-w-125px">Role</th>
                             <th class="min-w-125px">Phone</th>
-                            <th class="text-end min-w-100px">Actions</th>
+                            @if (Auth::user()->role == config('app.role.ADMIN'))
+                                <th class="text-end min-w-100px">Actions</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 fw-semibold">
@@ -107,38 +111,42 @@
                                 <td>
                                     <div class="badge badge-light fw-bold">{{ $user->phone }}</div>
                                 </td>
-                                <td class="text-end">
-                                    <a href="#"
-                                        class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary"
-                                        data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                        Actions
-                                        <i class="ki-duotone ki-down fs-5 ms-1"></i> </a>
-                                    <!--begin::Menu-->
-                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4"
-                                        data-kt-menu="true">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="{{ route('admin.page.user.edit', $user->id) }}" class="menu-link px-3">
-                                                Edit
-                                            </a>
-                                        </div>
-                                        <!--end::Menu item-->
+                                @if (Auth::user()->role_id == config('app.role.ADMIN'))
+                                    <td class="text-end">
+                                        <a href="#"
+                                            class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary"
+                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                            Actions
+                                            <i class="ki-duotone ki-down fs-5 ms-1"></i> </a>
+                                        <!--begin::Menu-->
+                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4"
+                                            data-kt-menu="true">
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a href="{{ route('admin.page.user.edit', $user->id) }}"
+                                                    class="menu-link px-3">
+                                                    Edit
+                                                </a>
+                                            </div>
+                                            <!--end::Menu item-->
 
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <form action="{{ route('admin.page.user.delete', $user->id) }}" method="POST"
-                                                type="button" onsubmit="return confirm('Bạn chắc chắn muốn xóa ?')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="menu-link px-3 btn">
-                                                    Delete
-                                                </button>
-                                            </form>
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <form action="{{ route('admin.page.user.delete', $user->id) }}"
+                                                    method="POST" type="button"
+                                                    onsubmit="return confirm('Bạn chắc chắn muốn xóa ?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="menu-link px-3 btn">
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <!--end::Menu item-->
                                         </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu-->
-                                </td>
+                                        <!--end::Menu-->
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

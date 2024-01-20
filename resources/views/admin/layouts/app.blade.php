@@ -131,6 +131,7 @@ License: For each use you must have a valid license purchased only from above li
     <!--end::Vendors Javascript-->
     <!--begin::Custom Javascript(used for this page only)-->
     <script src="{{ asset('admin_assets/js/custom/apps/ecommerce/catalog/save-product.js') }}"></script>
+    <script src="{{ asset('admin_assets/js/custom/apps/chat/chat.js') }}"></script>
     <!--begin::Custom Javascript(used for this page only)-->
     <script src="{{ asset('admin_assets/js/widgets.bundle.js') }}"></script>
     <script src="{{ asset('admin_assets/js/custom/widgets.js') }}"></script>

@@ -53,6 +53,12 @@
             color: red;
         }
 
+        .sell {
+            border: red 2px solid;
+            padding: 2px;
+            color: red;
+        }
+
         @media only screen and (max-width: 600px) {
             .h-logo {
                 max-width: 110px !important;

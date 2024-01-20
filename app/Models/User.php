@@ -25,6 +25,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Roles::class);
     }
+    public function infoShip()
+    {
+        return $this->hasMany(InfoShips::class);
+    }
     protected $fillable = [
         'name',
         'email',

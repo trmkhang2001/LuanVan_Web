@@ -39,6 +39,9 @@ Route::controller(ClientsController::class)->group(function () {
     Route::get('/order/{id}', 'order_detail')->name('client.order.detail');
     Route::get('/nopermision', 'nopermision')->name('nopermision');
     Route::get('/about', 'about');
+    Route::get('/addinfoship', 'add_info_ship');
+    Route::post('/addinfoship', 'post_info');
+    Route::get('/info/{id}', 'delete_info')->name('client.delete.info');
 });
 Route::controller(AuthController::class)->group(function () {
     Route::get('login', 'login')->name('login');
@@ -102,6 +105,7 @@ Route::middleware('auth', 'user-role')->group(function () {
             Route::get('/edit/{id}', 'edit')->name('admin.page.order.edit');
             Route::post('/edit/{id}', 'update');
             Route::delete('/{id}', 'destroy')->name('admin.page.order.delete');
+            Route::get('/send_mail', 'sendMail');
         });
         Route::controller(BannerController::class)->prefix('/banner')->group(function () {
             Route::get('/', 'index')->name('admin.page.banner');

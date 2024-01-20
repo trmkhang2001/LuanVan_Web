@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Clients;
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\Category;
+use App\Models\InfoShips;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\ParameterProducts;
@@ -14,6 +15,7 @@ use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,6 +27,18 @@ class ClientsController extends Controller
         $items = Product::orderBy('created_at', 'desc')->paginate(8);
         $banners = Banner::orderBy('created_at', 'desc')->where('vitri', config('app.vitri.TRANGHOME'))->where('status', config('app.status.ACTIVE'))->get();
         $suppliers = Supplier::where('status', config('app.status.ACTIVE'))->get();
+        if ($items) {
+            foreach ($items as $item) {
+                if ($item->promotion_id) {
+                    $promotion = Promotion::findOrFail($item->promotion_id);
+                    $item->price_sell = $item->price * ((100 - $promotion->percent) / 100);
+                    $item->percent = $promotion->percent;
+                } else {
+                    $item->price_sell = 0;
+                    $item->percent = 0;
+                }
+            }
+        }
         return view('clients.pages.home', ['items' => $items, 'suppliers' => $suppliers, 'banners' => $banners]);
     }
     public function page_product(Request $request)
@@ -42,6 +56,18 @@ class ClientsController extends Controller
             $items = Product::orderBy('created_at', 'desc')->where('category_id', explode(',', $q_categories))->whereBetween('price', array($from, $to))->paginate(12);
         } else {
             $items = Product::orderBy('created_at', 'desc')->whereBetween('price', array($from, $to))->whereBetween('price', array($from, $to))->paginate(12);
+        }
+        if ($items) {
+            foreach ($items as $item) {
+                if ($item->promotion_id) {
+                    $promotion = Promotion::findOrFail($item->promotion_id);
+                    $item->price_sell = $item->price * (100 - $promotion->percent) / 100;
+                    $item->percent = $promotion->percent;
+                } else {
+                    $item->price_sell = 0;
+                    $item->percent = 0;
+                }
+            }
         }
         return view('clients.pages.shop', ['items' => $items, 'banners' => $banners, 'categorys' => $categorys, 'promotions' => $promotions, 'q_categories' => $q_categories, 'from' => $from, 'to' => $to]);
     }
@@ -86,20 +112,18 @@ class ClientsController extends Controller
     }
     public function checkOut()
     {
-        $cartItems = Cart::instance('cart')->content();
-        return view('clients.pages.checkout', ['cartItems' => $cartItems]);
+        if (Auth::check()) {
+            $cartItems = Cart::instance('cart')->content();
+            $infoShip = InfoShips::where('user_id', Auth::user()->id)->get();
+            return view('clients.pages.checkout', ['cartItems' => $cartItems, 'infoShip' => $infoShip]);
+        } else {
+            return redirect()->route('client.page.cart')->with('error', 'Vui lòng đăng nhập để đặt hàng và theo dõi đơn hàng !');
+        }
     }
     public function order(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'phone' => 'required',
-            'email' => 'required',
-            'address' => 'required',
-            'province' => 'required',
-            'district' => 'required',
-            'ward' => 'required',
-        ]);
+        $id = $request->infoShip;
+        $infoShip = InfoShips::findOrFail($id);
         $totalcat = Cart::instance('cart')->content();
         $total = config('app.ship.PRICE');
         foreach ($totalcat as $cart) {
@@ -110,13 +134,13 @@ class ClientsController extends Controller
             $order = Order::create([
                 'user_id' => Auth::user()->id,
                 'total' => $total,
-                'name' => $request->name,
-                'phone' => $request->phone,
-                'email' => $request->email,
-                'ward' => $request->ward,
-                'district' => $request->district,
-                'province' => $request->province,
-                'address' => $request->address,
+                'name' => $infoShip->name,
+                'phone' => $infoShip->phone,
+                'email' => $infoShip->email,
+                'ward' => $infoShip->ward,
+                'district' => $infoShip->district,
+                'province' => $infoShip->province,
+                'address' => $infoShip->address,
                 'status' => config('app.order_status.ORDER'),
             ]);
             if ($order) {
@@ -163,6 +187,43 @@ class ClientsController extends Controller
             $products[] = $product;
         }
         return view('clients.pages.detail_order', ['order' => $order, 'products' => $products]);
+    }
+    public function add_info_ship()
+    {
+        return view('clients.pages.add_info_ship');
+    }
+    public function post_info(Request $request)
+    {
+        if (Auth::check()) {
+            $request->validate([
+                'name' => 'required',
+                'phone' => 'required',
+                'email' => 'required',
+                'address' => 'required',
+                'province' => 'required',
+                'district' => 'required',
+                'ward' => 'required',
+            ]);
+            $infoShip = InfoShips::create([
+                'user_id' => Auth::user()->id,
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'address' => $request->address,
+                'ward' => $request->ward,
+                'district' => $request->district,
+                'province' => $request->province,
+            ]);
+            return redirect()->back()->with('success', 'Thêm thông tin thành công!');
+        } else {
+            $this->nopermision();
+        }
+    }
+    public function delete_info(string $id)
+    {
+        $info = InfoShips::findOrFail($id);
+        $info->delete();
+        return redirect()->back();
     }
     public function nopermision()
     {

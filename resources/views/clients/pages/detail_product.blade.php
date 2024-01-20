@@ -147,9 +147,10 @@
                                 <div class="part">
                                     <h4 class="inner-title mb-2">⭐ Anh em lưu ý: </h4>
                                     <p class="font-light">
-                                        👉 Mọi PC SAO CHỔI đều có thể thay đổi linh kiện được, tùy nhu cầu anh em.
+                                        👉 Mọi MK Computer đều có thể thay đổi linh kiện được, tùy nhu cầu anh em.
 
-                                        👉 Liên hệ Sao Chổi qua Zalo (0866411902) , Fanpage để được tư vấn trực tiếp anh em
+                                        👉 Liên hệ MK Computer qua Zalo (0866411902) , Fanpage để được tư vấn trực tiếp anh
+                                        em
                                         nhé.
                                     </p>
                                 </div>

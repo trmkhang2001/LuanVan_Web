@@ -122,9 +122,20 @@
                                     <div class="card-body">
                                         <a href="{{ route('client.page.detail', $product->id) }}"
                                             class="text-dark fs-6 fw-bold text-uppercase pd-name">{{ $product->name }}</a>
-                                        <p class=" fs-6 text-decoration-line-through"> 10,000,000 đ</p>
-                                        <p class="fs-6 fw-bold text-danger">{{ number_format($product->price) . ' đ' }}
-                                        </p>
+                                        @if ($product->price_sell == 0)
+                                            <p class=" fs-6 text-decoration-line-through">
+                                                {{ number_format($product->price) }} đ</p>
+                                        @else
+                                            <p class=" fs-6 text-decoration-line-through">
+                                                {{ number_format($product->price_sell) }} đ</p>
+                                        @endif
+                                        <div class="d-flex flex-wrap">
+                                            <p class="fs-6 fw-bold text-danger">{{ number_format($product->price) . ' đ' }}
+                                            </p>
+                                            @if ($product->percent != 0)
+                                                <p class="ms-4 fs-6 sell">{{ '- ' . $product->percent . '%' }}</p>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>

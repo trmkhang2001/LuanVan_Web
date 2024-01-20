@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Mail;
 
 class OrderController extends Controller
 {
@@ -37,6 +38,7 @@ class OrderController extends Controller
                 }
                 $order->status = config('app.order_status.SHIPPING');
                 $order->update();
+                $this->sendMail($id, $order->name, $order->email);
                 return redirect()->back();
             case config('app.order_status.SHIPPING'):
                 $order->status = config('app.order_status.DONE');
@@ -78,5 +80,21 @@ class OrderController extends Controller
         $order = Order::with('orderItems')->findOrFail($id);
         $order->delete();
         return redirect()->route('admin.page.order.index')->with('success', 'Delete Product Success');
+    }
+    public function sendMail($id, $name, $gmail)
+    {
+        $order = Order::with('orderItems')->findOrFail($id);
+        $products = [];
+        foreach ($order->orderItems as $item) {
+            $product = Product::findOrFail($item->product_id);
+            $product->quantity = $item->quantity;
+            $product->price = $item->price;
+            $product->created_at = $item->created_at;
+            $products[] = $product;
+        }
+        Mail::send('admin.orders.mail_nofi', ['name' => $name, 'order' => $order, 'product' => $products],  function ($email) use ($gmail) {
+            $email->subject('Đặt hàng công !');
+            $email->to($gmail);
+        });
     }
 }

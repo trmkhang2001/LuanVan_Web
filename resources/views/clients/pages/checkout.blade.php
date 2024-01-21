@@ -40,7 +40,17 @@
                     <div class="row mb-3">
                         <div class="d-flex flex-wrap justify-content-between my-3">
                             <h3 class="mb-3 theme-color">Sử dụng thông tin có sẵn</h3>
-                            <button type="submit" class="btn btn-solid-default "> Đặt hàng </button>
+                            <div class="">
+                                <div class="mb-3">
+                                    <input type="radio" name="vnpay" id="flexCheckDefault" value="1"> Thanh toán
+                                    VNPAY
+                                </div>
+                                <div class="mb-3">
+                                    <input type="radio" name="vnpay" id="flexCheckDefault" value="0" checked> Ship
+                                    COD
+                                </div>
+                                <button type="submit" class="btn btn-solid-default "> Đặt hàng </button>
+                            </div>
                         </div>
                         @foreach ($infoShip as $index => $info)
                             <div class="col-6 mb-2">

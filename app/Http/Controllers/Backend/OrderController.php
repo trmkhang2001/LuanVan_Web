@@ -12,7 +12,7 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::orderBy('created_at', 'desc')->paginate(5);
         return view('admin.orders.index', compact('orders'));
     }
     public function search(Request $request)

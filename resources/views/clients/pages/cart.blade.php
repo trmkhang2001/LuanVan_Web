@@ -40,6 +40,11 @@
                     {{ Session::get('error') }}
                 </div>
             @endif
+            @if (Session::has('success'))
+                <div class="alert alert-primary" role="alert">
+                    {{ Session::get('success') }}
+                </div>
+            @endif
             @if ($cartItems->count() > 0)
                 <div class="row">
                     <div class="col-md-12 text-center">

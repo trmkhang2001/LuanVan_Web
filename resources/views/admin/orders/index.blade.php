@@ -196,6 +196,9 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="">
+                        {{ $orders->links() }}
+                    </div>
                 </div>
                 <!--end::Table-->
             </div>

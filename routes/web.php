@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\PromotionController;
 use App\Http\Controllers\Backend\SupplierController;
+use App\Http\Controllers\Backend\TransactionsController;
 use App\Http\Controllers\Backend\UsersController;
 use App\Http\Controllers\Clients\ClientsController;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,8 @@ Route::controller(ClientsController::class)->group(function () {
     Route::get('/addinfoship', 'add_info_ship');
     Route::post('/addinfoship', 'post_info');
     Route::get('/info/{id}', 'delete_info')->name('client.delete.info');
+    Route::get('/createVNPAY/{id}/{amout}', 'createVNPAY')->name('request.pay');
+    Route::get('/vnpay_return', 'returnVNPAY');
 });
 Route::controller(AuthController::class)->group(function () {
     Route::get('login', 'login')->name('login');
@@ -106,6 +109,9 @@ Route::middleware('auth', 'user-role')->group(function () {
             Route::post('/edit/{id}', 'update');
             Route::delete('/{id}', 'destroy')->name('admin.page.order.delete');
             Route::get('/send_mail', 'sendMail');
+        });
+        Route::controller(TransactionsController::class)->prefix('/transaction')->group(function () {
+            Route::get('/', 'index');
         });
         Route::controller(BannerController::class)->prefix('/banner')->group(function () {
             Route::get('/', 'index')->name('admin.page.banner');

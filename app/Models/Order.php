@@ -20,7 +20,7 @@ class Order extends Model
 
     public function transaction()
     {
-        return $this->hasOne(Transaction::class);
+        return $this->hasOne(Transactions::class);
     }
     protected static function boot()
     {
@@ -41,5 +41,6 @@ class Order extends Model
         'province',
         'address',
         'status',
+        'isPay',
     ];
 }

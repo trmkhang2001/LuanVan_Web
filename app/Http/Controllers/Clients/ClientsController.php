@@ -12,6 +12,7 @@ use App\Models\ParameterProducts;
 use App\Models\Product;
 use App\Models\Promotion;
 use App\Models\Supplier;
+use App\Models\Transactions;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -40,6 +41,65 @@ class ClientsController extends Controller
             }
         }
         return view('clients.pages.home', ['items' => $items, 'suppliers' => $suppliers, 'banners' => $banners]);
+    }
+    public function createVNPAY(string $id, float $amout)
+    {
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+        $vnp_Returnurl = "http://127.0.0.1:8000/vnpay_return";
+        $vnp_TmnCode = "Q4M14LB2"; //Mã website tại VNPAY 
+        $vnp_HashSecret = "JRZLABOOOXUPSGRRTMTIBNCZBUCLGHIJ"; //Chuỗi bí mật
+
+        $startTime = date("YmdHis");
+        $expire = date('YmdHis', strtotime('+15 minutes', strtotime($startTime)));
+
+        $vnp_TxnRef = $id; //Mã giao dịch thanh toán tham chiếu của merchant
+        $vnp_Amount = $amout * 100; // Số tiền thanh toán
+        $vnp_Locale = "VN"; //Ngôn ngữ chuyển hướng thanh toán
+        $vnp_BankCode = "NCB"; //Mã phương thức thanh toán
+        $vnp_IpAddr = $_SERVER['REMOTE_ADDR']; //IP Khách hàng thanh toán
+
+        $inputData = array(
+            "vnp_Version" => "2.1.0",
+            "vnp_TmnCode" => $vnp_TmnCode,
+            "vnp_Amount" => $vnp_Amount,
+            "vnp_Command" => "pay",
+            "vnp_CreateDate" => date('YmdHis'),
+            "vnp_CurrCode" => "VND",
+            "vnp_IpAddr" => $vnp_IpAddr,
+            "vnp_Locale" => $vnp_Locale,
+            "vnp_OrderInfo" => "Thanh toan GD:" . $vnp_TxnRef,
+            "vnp_OrderType" => "other",
+            "vnp_ReturnUrl" => $vnp_Returnurl,
+            "vnp_TxnRef" => $vnp_TxnRef,
+            "vnp_ExpireDate" => $expire
+        );
+
+        if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+            $inputData['vnp_BankCode'] = $vnp_BankCode;
+        }
+
+        ksort($inputData);
+        $query = "";
+        $i = 0;
+        $hashdata = "";
+        foreach ($inputData as $key => $value) {
+            if ($i == 1) {
+                $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
+            } else {
+                $hashdata .= urlencode($key) . "=" . urlencode($value);
+                $i = 1;
+            }
+            $query .= urlencode($key) . "=" . urlencode($value) . '&';
+        }
+
+        $vnp_Url = $vnp_Url . "?" . $query;
+        if (isset($vnp_HashSecret)) {
+            $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //  
+            $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
+        }
+        return redirect($vnp_Url);
+        // vui lòng tham khảo thêm tại code demo
     }
     public function page_product(Request $request)
     {
@@ -123,6 +183,7 @@ class ClientsController extends Controller
     public function order(Request $request)
     {
         $id = $request->infoShip;
+        $pay = $request->vnpay;
         $infoShip = InfoShips::findOrFail($id);
         $totalcat = Cart::instance('cart')->content();
         $total = config('app.ship.PRICE');
@@ -142,6 +203,7 @@ class ClientsController extends Controller
                 'province' => $infoShip->province,
                 'address' => $infoShip->address,
                 'status' => config('app.order_status.ORDER'),
+                'isPay' => false,
             ]);
             if ($order) {
                 foreach ($carts as $cart) {
@@ -154,7 +216,11 @@ class ClientsController extends Controller
                 }
                 $this->clearCart();
             }
-            return redirect()->route('client.page.cart');
+            if ($pay == 1) {
+                return $this->createVNPAY($order->id, $order->total);
+            } else {
+                return redirect()->route('client.page.cart')->with('success', 'Đặt hàng thành công vào theo dõi đơn hàng đêm theo dõi tiến độ !');
+            }
         }
     }
     public function order_list()
@@ -228,5 +294,52 @@ class ClientsController extends Controller
     public function nopermision()
     {
         return view('clients.pages.norpermission');
+    }
+    public function returnVNPAY()
+    {
+        $vnp_HashSecret = "JRZLABOOOXUPSGRRTMTIBNCZBUCLGHIJ"; //Chuỗi bí mật
+        $vnp_SecureHash = $_GET['vnp_SecureHash'];
+        $inputData = array();
+        foreach ($_GET as $key => $value) {
+            if (substr($key, 0, 4) == "vnp_") {
+                $inputData[$key] = $value;
+            }
+        }
+
+        unset($inputData['vnp_SecureHash']);
+        ksort($inputData);
+        $i = 0;
+        $hashData = "";
+        foreach ($inputData as $key => $value) {
+            if ($i == 1) {
+                $hashData = $hashData . '&' . urlencode($key) . "=" . urlencode($value);
+            } else {
+                $hashData = $hashData . urlencode($key) . "=" . urlencode($value);
+                $i = 1;
+            }
+        }
+
+        $secureHash = hash_hmac('sha512', $hashData, $vnp_HashSecret);
+        if ($secureHash == $vnp_SecureHash) {
+            if ($_GET['vnp_ResponseCode'] == '00') {
+                $order_id =  $_GET['vnp_TxnRef'];
+                $order = Order::findOrFail($order_id);
+                $order->isPay = true;
+                $order->update();
+                //transaction
+                $nd = $_GET['vnp_OrderInfo'];
+                $amout = $_GET['vnp_Amount'];
+                $amout = $amout / 100;
+                $transaction = Transactions::create([
+                    'order_id' => $order_id,
+                    'amout' => $amout,
+                    'noidung' => $nd,
+                    'status' => true,
+                ]);
+                return redirect()->route('client.page.cart')->with('success', 'Đặt hàng thành công vào theo dõi đơn hàng đêm theo dõi tiến độ !');
+            } else {
+                echo "Giao dịch không thành công";
+            }
+        }
     }
 }

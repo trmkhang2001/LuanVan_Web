@@ -66,6 +66,10 @@
                                         rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending"
                                         style="width: 97.0375px;">
                                         Trạng thái</th>
+                                    <th class=" min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_sales_table"
+                                        rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending"
+                                        style="width: 97.0375px;">
+                                        Thanh toán</th>
                                     <th class="min-w-70px sorting" rowspan="1" colspan="1" style="width: 60px">Cập
                                         nhật</th>
                                     <th class="min-w-70px sorting" rowspan="1" colspan="1" style="width: 60px">Hủy đơn
@@ -111,6 +115,13 @@
                                                 <div class="badge badge-light-success">Done</div>
                                             @elseif ($order->status == config('app.order_status.CANCEL'))
                                                 <div class="badge badge-light-danger">Cancel</div>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($order->isPay)
+                                                <div class="badge badge-success">Đã thanh toán</div>
+                                            @else
+                                                <div class="badge badge-light-danger">Chưa thanh toán</div>
                                             @endif
                                         </td>
                                         <td>

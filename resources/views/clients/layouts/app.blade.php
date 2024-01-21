@@ -59,6 +59,15 @@
             color: red;
         }
 
+        .tit-pro {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            /* number of lines to show */
+            line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+
         @media only screen and (max-width: 600px) {
             .h-logo {
                 max-width: 110px !important;
